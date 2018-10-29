@@ -5,7 +5,6 @@
 	<div id="index"  >
 		<div class="head">你好中国</div>
 		this is index
-		<mt-button>按钮</mt-button>
 	</div>
 </template>
 
