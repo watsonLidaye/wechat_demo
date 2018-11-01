@@ -23,13 +23,14 @@ import 'mint-ui/lib/style.css'
 
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   // scrollBehavior(to, from, savedPosition) {},
   routes
 })
 
 
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.pageTitle
   next()
 })
 
