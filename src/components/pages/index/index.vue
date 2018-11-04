@@ -18,19 +18,19 @@
 				</mt-swipe>
 		</div>
 		<div class="headnav flex_align">
-			<div class='w_33 h24 juc_colum'>
+			<div class='w_33 h24 juc_colum' @click="jump('getGoods')">
 				<div class="flex_align">
 					<img src="./image/奖品@2x.png" class="w32h32 mr15">
 					<div class="">有奖专区</div>
 				</div>
 			</div>
-			<div class='w_33 h24 juc_colum'>
+			<div class='w_33 h24 juc_colum' @click="jump('recruit')">
 				<div class="flex_align">
 					<img src="./image/名企@2x.png" class="w32h32 mr15">
 					<div class="">名企招聘</div>
 				</div>
 			</div>
-			<div class='w_33 h24 juc_colum'>
+			<div class='w_33 h24 juc_colum'  @click="jump('ranking')">
 				<div class="flex_align">
 					<img src="./image/榜单@2x.png" class="w32h32 mr15">
 					<div class="">推荐榜单</div>
@@ -87,6 +87,11 @@ export default {
 		}
 	},
 	mounted(){
+	},
+	methods:{
+		jump(path){
+			this.$router.push({name:path})
+		}
 	}
 
 

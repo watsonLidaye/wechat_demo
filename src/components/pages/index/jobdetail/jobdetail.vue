@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		<div class="w_100 mb40">
-			<div class="w_100 jub_jub_center pt60 pb70">
+			<router-link to="companyDetail" class="w_100 jub_jub_center pt60 pb70">
 				<div class="flex_align ml35">
 					<div class="logo_img mr15"></div>
 					<div class="logo_img_height juc_colum_b">
@@ -27,7 +27,7 @@
 					</div>
 				</div>
 				<img src="./image/arrow@2x.png" class="w32h32 mr35">
-			</div>
+			</router-link>
 			<div class="w724h173">
 				<div class="w684h184">
 					<div>
