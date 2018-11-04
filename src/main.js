@@ -21,22 +21,19 @@ import '@/assets/js/public.js'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
-
 const router = new VueRouter({
-  // mode: 'history',
+  mode: 'history',
   // scrollBehavior(to, from, savedPosition) {},
   routes
 })
 
-
 router.beforeEach((to, from, next) => {
   document.title = to.meta.pageTitle
+  console.log(to)
   next()
 })
 
-router.afterEach((to, from) => {
-
-})
+router.afterEach((to, from) => {})
 
 axios.defaults.timeout = 1000 * 15
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
@@ -47,7 +44,6 @@ Vue.use(VueLazyload)
 Vue.use(Lockr)
 Vue.use(Mint)
 Vue.prototype.axios = axios
-
 
 window.$http = axios
 window.$utill = utill
