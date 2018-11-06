@@ -59,7 +59,7 @@
 </template>
 <script type='text/ecmascript-6'>
 export default {
-  name: 'mineInfo',
+  name: 'myInfo',
   data () {
     return {
       name: 'Leslie Cheung'

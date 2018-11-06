@@ -1,8 +1,11 @@
 import index from '@/components/pages/index/index'
 import jobdetail from '@/components/pages/index/jobdetail/jobdetail'
-import mine from '@/components/pages/mine/index'
-import mineInfo from '@/components/pages/mine/mineInfo/index'
-import mineWork from '@/components/pages/mine/mineWork/index'
+import my from '@/components/pages/my/index'
+import myInfo from '@/components/pages/my/myInfo/index'
+import myWork from '@/components/pages/my/myWork/index'
+import myIntro from '@/components/pages/my/myIntro/index'
+import introDetail from '@/components/pages/my/myIntro/introDetail/index'
+import myAccount from '@/components/pages/my/myAccount/index'
 
 const routes = [
   {
@@ -22,27 +25,51 @@ const routes = [
     }
   },
   {
-    path: '/mine',
-    name: 'mine',
-    component: mine,
+    path: '/my',
+    name: 'my',
+    component: my,
     meta: {
       pageTitle: '我的'
     }
   },
   {
-    path: '/mineInfo',
-    name: 'mineInfo',
-    component: mineInfo,
+    path: '/myInfo',
+    name: 'myInfo',
+    component: myInfo,
     meta: {
       pageTitle: '我的信息'
     }
   },
   {
-    path: '/mineWork',
-    name: 'mineWork',
-    component: mineWork,
+    path: '/myWork',
+    name: 'myWork',
+    component: myWork,
     meta: {
       pageTitle: '我的工作'
+    }
+  },
+  {
+    path: '/myIntro',
+    name: 'myIntro',
+    component: myIntro,
+    meta: {
+      pageTitle: '我的推荐'
+    }
+  },
+  {
+    path: '/introDetail',
+    name: 'introDetail',
+    component: introDetail,
+    meta: {
+      pageTitle: '我的推荐'
+    }
+  },
+  {
+    path: '/myAccount',
+    name: 'myAccount',
+    component: myAccount,
+    meta: {
+      pageTitle: '我的账户'
     }
   }
 ]

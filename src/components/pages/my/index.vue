@@ -12,7 +12,7 @@
                    src="./image/ico_nan.png"><img v-else
                    class="icon_30 ml15"
                    src="./image/ico_nv.png"></h3>
-            <router-link to="/mineInfo">
+            <router-link to="/myInfo">
               <p class="mine_info">我的信息<img class="icon_30 ml10"
                      src="./image/_icobj.png"></p>
             </router-link>
@@ -25,7 +25,7 @@
       <div class="user_main">
         <!-- operation -->
         <div class="user_operation">
-          <router-link to="/mineWork">
+          <router-link to="/myWork">
             <div class="operation_item">
               <img class="icon_60 mr25"
                    src="./image/ico_work.png">
@@ -35,22 +35,26 @@
               </div>
             </div>
           </router-link>
-          <div class="operation_item">
-            <img class="icon_60 mr25"
-                 src="./image/ico_tuijian.png">
-            <div class="w_100 operation_item_r border_e2e2e2">
-              我的推荐<img class="icon_30"
-                   src="./image/arrow_1.png">
+          <router-link to="/myIntro">
+            <div class="operation_item">
+              <img class="icon_60 mr25"
+                   src="./image/ico_tuijian.png">
+              <div class="w_100 operation_item_r border_e2e2e2">
+                我的推荐<img class="icon_30"
+                     src="./image/arrow_1.png">
+              </div>
             </div>
-          </div>
-          <div class="operation_item mb15">
-            <img class="icon_60 mr25"
-                 src="./image/ico_zhanghu.png">
-            <div class="w_100 operation_item_r">
-              我的账户<img class="icon_30"
-                   src="./image/arrow_1.png">
+          </router-link>
+          <router-link to="/myAccount">
+            <div class="operation_item mb15">
+              <img class="icon_60 mr25"
+                   src="./image/ico_zhanghu.png">
+              <div class="w_100 operation_item_r">
+                我的账户<img class="icon_30"
+                     src="./image/arrow_1.png">
+              </div>
             </div>
-          </div>
+          </router-link>
           <div class="operation_item">
             <img class="icon_60 mr25"
                  src="./image/ico_jieqian.png">
@@ -74,13 +78,13 @@
 </template>
 <script type='text/ecmascript-6'>
 export default {
-  name: 'mine',
+  name: 'my',
   data () {
     return {
       id: '',
       name: 'Leslie Cheung',
       sex: 2,
-      headimgurl: 'https://avatars0.githubusercontent.com/u/39576364?s=40&v=4'
+      headimgurl: 'https://avatars2.githubusercontent.com/u/39576364?s=460&v=4'
     }
   },
   created () { },
