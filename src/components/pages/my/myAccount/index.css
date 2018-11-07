@@ -1,6 +1,7 @@
 .account_panel {
-  width: 7.5rem;
-  height: 13.34rem;
+  width: 100%;
+  max-width: 7.5rem;
+  height: 100%;
   background: rgba(255, 255, 255, 1);
   margin: 0 auto;
 }
@@ -49,6 +50,12 @@
   display: inline-block;
   margin-left: 0.1rem;
 }
+.pt32 {
+  padding-top: 0.32rem;
+}
+.pb32 {
+  padding-bottom: 0.32rem;
+}
 .color_fff {
   color: #fff;
 }
@@ -62,7 +69,14 @@
   font-size: 0.18rem;
   font-family: PingFang-SC-Bold;
   font-weight: bold;
+  background: #a18859;
   color: rgba(249, 217, 154, 1);
+}
+.color_brown {
+  color: #a18859;
+}
+.color_333 {
+  color: #333;
 }
 .bg_grey {
   background: url('./image/frame_black@2x.png');
@@ -86,19 +100,104 @@
 }
 .account_balance_wrap {
   padding-top: 0.16rem;
-  padding-bottom: 0.32rem;
+  padding-bottom: 0.1rem;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 .account_balance {
   font-size: 0.64rem;
+  line-height: 0.64rem;
+  display: inline-block;
   font-family: PingFang-SC-Bold;
   font-weight: bold;
-  color: rgba(255, 255, 255, 1);
 }
 .cny {
-  font-size: 32px;
+  font-size: 0.32rem;
   font-family: PingFang-SC-Medium;
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
+}
+.account_op {
+  margin-top: 0.66rem;
+  border-top: 1px solid rgba(226, 226, 226, 1);
+}
+.account_op_item {
+  padding: 0.32rem 0;
+  font-size: 0.32rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(226, 226, 226, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dark_screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+}
+.screen_box {
+  width: 5.64rem;
+  height: 4.16rem;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 0.08rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -2.82rem;
+  margin-top: -2.08rem;
+}
+.screen_title {
+  border-bottom: 1px solid rgba(226, 226, 226, 1);
+  font-size: 0.32rem;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+  padding: 0.24rem 0.42rem;
+  box-sizing: border-box;
+}
+.screen_form {
+  width: 3.32rem;
+  padding-top: 0.5rem;
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cash_input {
+  padding: 0.32rem 0.32rem;
+  box-sizing: border-box;
+  border-bottom: 0.02rem solid rgba(51, 51, 51, 1);
+  font-size: 0.32rem;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  outline: none;
+  text-align: center;
+}
+.cash_input::-webkit-input-placeholder {
+  color: rgba(204, 204, 204, 1);
+}
+.next_step_btn {
+  width: 3.32rem;
+  height: 0.8rem;
+  background: linear-gradient(
+    0deg,
+    rgba(251, 116, 90, 1),
+    rgba(249, 180, 162, 1)
+  );
+  border-radius: 0.1rem;
+  font-size: 0.32rem;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  text-align: center;
+  line-height: 0.8rem;
+  color: #fff;
+  margin-top: 0.5rem;
 }
