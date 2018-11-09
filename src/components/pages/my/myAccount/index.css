@@ -172,7 +172,7 @@
   flex-wrap: wrap;
 }
 .cash_input {
-  padding: 0.32rem 0.32rem;
+  padding: 0.32rem 0;
   box-sizing: border-box;
   border-bottom: 0.02rem solid rgba(51, 51, 51, 1);
   font-size: 0.32rem;
@@ -200,4 +200,10 @@
   line-height: 0.8rem;
   color: #fff;
   margin-top: 0.5rem;
+}
+.hidden {
+  display: none;
+}
+.show {
+  display: block;
 }

@@ -56,8 +56,28 @@
         </div>
         <!-- cash_advance -->
         <div class="dark_screen">
-          <div class="screen_box">
+          <div class="screen_box hidden">
             <h3 class="screen_title">提现</h3>
+            <div class="screen_form">
+              <input type="number"
+                     placeholder="请输入提现金额"
+                     class="cash_input"
+                     :value="cash_val">
+              <div class="next_step_btn">下一步</div>
+            </div>
+          </div>
+          <div class="screen_box hidden">
+            <h3 class="screen_title">借钱</h3>
+            <div class="screen_form">
+              <input type="number"
+                     placeholder="请输入提现金额"
+                     class="cash_input"
+                     :value="cash_val">
+              <div class="next_step_btn">下一步</div>
+            </div>
+          </div>
+          <div class="screen_box">
+            <h3 class="screen_title">请确认以下信息</h3>
             <div class="screen_form">
               <input type="number"
                      placeholder="请输入提现金额"
