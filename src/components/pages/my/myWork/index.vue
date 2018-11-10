@@ -38,14 +38,14 @@ export default {
           id: '1',
           type: 1,
           name: '富士康',
-          logo: '//cdn2.jianshu.io/assets/default_avatar/11-4d7c6ca89f439111aff57b23be1c73ba.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240',
+          logo: 'http://upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180',
           time: '2018.10.31',
           status: 1
         }, {
           id: '2',
           type: 2,
           name: '华强北',
-          logo: '//cdn2.jianshu.io/assets/default_avatar/11-4d7c6ca89f439111aff57b23be1c73ba.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240',
+          logo: 'http://upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180',
           time: '2018.10.31',
           status: 2
         }

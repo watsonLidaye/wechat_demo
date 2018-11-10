@@ -5,8 +5,8 @@
         <router-link to="/introDetail">
           <div class="intro_item bg_red">
             <div class="color_f8f8f8">
-              <div class="mb25">
-                <img src="./image/头像阴影_red@2x.png"
+              <div class="mb35">
+                <img src="http://upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180"
                      alt=""
                      class="intro_avatar">
                 <div class="inline_block">
@@ -24,8 +24,8 @@
         <router-link to="/introDetail">
           <div class="intro_item bg_blue">
             <div class="color_f8f8f8">
-              <div class="mb25">
-                <img src="./image/头像阴影_blue@2x.png"
+              <div class="mb35">
+                <img src="http://upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180"
                      alt=""
                      class="intro_avatar">
                 <div class="inline_block">

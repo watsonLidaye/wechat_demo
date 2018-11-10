@@ -6,6 +6,10 @@ import myWork from '@/components/pages/my/myWork/index'
 import myIntro from '@/components/pages/my/myIntro/index'
 import introDetail from '@/components/pages/my/myIntro/introDetail/index'
 import myAccount from '@/components/pages/my/myAccount/index'
+import accountDetail from '@/components/pages/my/myAccount/accountDetail/index'
+import accountSetting from '@/components/pages/my/myAccount/accountSetting/index'
+import myBorrow from '@/components/pages/my/myBorrow/index'
+import borrowSubmit from '@/components/pages/my/borrowSubmit/index'
 
 const routes = [
   {
@@ -70,6 +74,38 @@ const routes = [
     component: myAccount,
     meta: {
       pageTitle: '我的账户'
+    }
+  },
+  {
+    path: '/accountDetail',
+    name: 'accountDetail',
+    component: accountDetail,
+    meta: {
+      pageTitle: '我的账户'
+    }
+  },
+  {
+    path: '/accountSetting',
+    name: 'accountSetting',
+    component: accountSetting,
+    meta: {
+      pageTitle: '账户资料设置'
+    }
+  },
+  {
+    path: '/myBorrow',
+    name: 'myBorrow',
+    component: myBorrow,
+    meta: {
+      pageTitle: '我要借钱'
+    }
+  },
+  {
+    path: '/borrowSubmit',
+    name: 'borrowSubmit',
+    component: borrowSubmit,
+    meta: {
+      pageTitle: '我要借钱'
     }
   }
 ]

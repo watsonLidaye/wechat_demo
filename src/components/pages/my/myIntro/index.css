@@ -42,6 +42,7 @@
   width: 0.7rem;
   height: 0.7rem;
   display: inline-block;
+  border-radius: 50%;
 }
 .color_f8f8f8 {
   color: #f8f8f8;
