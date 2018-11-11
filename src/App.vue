@@ -51,7 +51,50 @@ export default {
       login_success: true
     }
   },
+  created(){
+  },
+  mounted(){
+    $http.get($utill.api.url + $utill.api.api.jssdk+'?url='+encodeURIComponent(location.href.split('#')[0])).then((res) => {
+       Lockr.set('appId',res.data.data.appId)
+      if (res.data.code == 1) {
+        this.wxconfig.config({debug: true,
+            appId: res.data.data.appId, // 必填，公众号的唯一标识
+            timestamp:res.data.data.timestamp , // 必填，生成签名的时间戳
+            nonceStr: res.data.data.nonceStr, // 必填，生成签名的随机串
+            signature: res.data.data.signature,// 必填，签名，见附录1
+            jsApiList:res.data.data.jsApiList, // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          })//通过config接口注入权限验证配置
+      }
+       this.login()
+    }).catch((res) => {
 
+    })
+  },
+  methods:{
+    login(){
+      if ( Lockr.get('token')) {
+        return false
+      } else {
+        let data = {}
+        data.code = location.href.split('code=')[1].split('&')[0]
+        $http.post($utill.api.url + $utill.api.api.authorizations,data).then((res) => {
+          if (res.data.code == 1) {
+            Lockr.set('token',res.data.data.access_token)
+            Lockr.set('token_type',res.data.data.token_type)
+            let time = {}
+            time.expires_in = res.data.data.expires_in
+            time.tokenrecode = Date.parse(new Date())
+            Lockr.set('time',time)
+          } else {
+            console.log(res)
+            }
+          }).catch((res) => {
+            console.log(res)
+          })
+      }
+    },
+
+  }
 }
 </script>
 
