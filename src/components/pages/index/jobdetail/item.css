@@ -4,6 +4,7 @@
 	margin: 0 auto;
 	position: relative;
 	box-sizing: border-box;
+	overflow-y: auto;
 }
 .bt_b{
 	border-bottom:1px solid rgba(226,226,226,1);

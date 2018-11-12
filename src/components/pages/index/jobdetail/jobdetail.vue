@@ -2,7 +2,7 @@
  @import 'item.css'
 </style>
 <template>
-	<div id="jobdetail " >
+	<div id="jobdetail " v-loading="loadding" :style="{'height':fullHeight+'px'}">
 		<div class="w_100 pl35 pr35 box_border">
 			<div class="w_100 bt_b">
 				<div class="w_100 jub_jub_center pt60 pb25 ">
@@ -104,6 +104,7 @@ export default {
 	data () {
 		return {
 			fullHeight: document.documentElement.clientHeight,
+			loadding:true
 		}
 	},
 	mounted(){

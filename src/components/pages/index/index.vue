@@ -34,34 +34,36 @@
 				</div>
 			</div>
 		</div>
-		<div class="navbto"></div>
-		<div class="pb_tabbas">
-			<template v-for="(item,index) in list" v-if="item">
-				<router-link :to="'/jobdetail?id='+item.company_id" class="block relative w_100 pd30 box_border pb15"  :key="index+'list'" >
-					<div class="w_100 jub_jub_center mb25">
-						<div class="ft30 flex_align ">
-							<div>{{item.name}}</div>
-							<div class="ml20 label_price" v-if="item.is_reward!=0">有奖</div>
+		<div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50">
+			<div class="navbto"></div>
+			<div class="pb_tabbas">
+				<template v-for="(item,index) in list" v-if="item">
+					<router-link :to="'/jobdetail?id='+item.company_id" class="block relative w_100 pd30 box_border pb15"  :key="index+'list'" >
+						<div class="w_100 jub_jub_center mb25">
+							<div class="ft30 flex_align ">
+								<div>{{item.name}}</div>
+								<div class="ml20 label_price" v-if="item.is_reward!=0">有奖</div>
+							</div>
+							<div class="ft24 index_money">{{item.salary_begin}}-{{item.salary_end}}元</div>
 						</div>
-						<div class="ft24 index_money">{{item.salary_begin}}-{{item.salary_end}}元</div>
-					</div>
-					<div class="flex_warp w_100 mb25">
-						<div class="label_index">五险</div>
-						<div class="label_index">包吃</div>
-					</div>
-					<div class="flex_align">
-						<img class="logo_img mr15" v-lazy="item.company.logo">
-						<div class="logo_img_height juc_colum_b">
-							<div>
-								<div class="ft22 mb15">{{item.company.name}}</div>
-								<div class="ft22 color_99">已报名 {{item.user_enrolls_count}} 人</div>
+						<div class="flex_warp w_100 mb25">
+							<div class="label_index">五险</div>
+							<div class="label_index">包吃</div>
+						</div>
+						<div class="flex_align">
+							<img class="logo_img mr15" v-lazy="item.company.logo">
+							<div class="logo_img_height juc_colum_b">
+								<div>
+									<div class="ft22 mb15">{{item.company.name}}</div>
+									<div class="ft22 color_99">已报名 {{item.user_enrolls_count}} 人</div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<img src="./image/置顶@2x.png" class="top">
-				</router-link>
-				<div class="navbto" :key="index+'bot'"></div>
-			</template>
+						<img src="./image/置顶@2x.png" class="top">
+					</router-link>
+					<div class="navbto" :key="index+'bot'"></div>
+				</template>
+			</div>
 		</div>
 		<tabbas></tabbas>
 	</div>
@@ -77,10 +79,10 @@ export default {
 	data () {
 		return {
 			fullHeight: document.documentElement.clientHeight,
-			request_count:0,
 			banner:[],
 			list:[],
-			list1:[],
+			loading:false,
+			page:1,
 		}
 	},
 	mounted(){
@@ -93,40 +95,40 @@ export default {
 		refreh(){
 			$utill.common.chcktoken()
 		},
-		pageGet(){
-			let url = ''
-			if (this.request_count>2) {
-				this.request_count = 0
-				this.list = this.list1
-				console.log(this.list)
-				return false
-			}
-			if (this.request_count == 0) {
-				url = $utill.api.url + $utill.api.api.index_baner
-			}
-			if (this.request_count == 1) {
-				url = $utill.api.url + $utill.api.api.index_job
-			}
-			if (this.request_count == 2) {
-				url = $utill.api.url + $utill.api.api.index_jreward
-			}
-			 $http.get(url).then( res => {
-			 	if (this.request_count == 0) {
+		bannerGet(){
+			 $http.get($utill.api.url + $utill.api.api.index_baner).then( res => {
 				 	this.banner = res.data.data
-				}
-				if (this.request_count == 1) {
-					this.list1 = res.data.data.data
-				}
-				if (this.request_count == 2) {
-					for (let i in res.data.data) {
-						this.list1.push(res.data.data.data[i])
-					}
-				}
-				this.request_count+=1
-				this.pageGet()
 			 }).catch(res => {
 				console.log(res)
 			 })
+		},
+		pageGet(){
+			let data = {}
+			data.page = this.page
+			 $http.get($utill.api.url + $utill.api.api.index_job).then( res => {
+			 	if (this.page == 1) {
+			 		this.list = res.data.data.data
+			 	} else {
+					for (let i in res.data.data.data) {
+						this.list.push(res.data.data.data[i])
+					}
+			 	}
+				this.last_page = res.data.data.last_page
+				this.loading = false
+			 }).catch(res => {
+				console.log(res)
+			 })
+		},
+		loadMore() {
+			if (this.list.length==0) {
+				return false
+			}
+			this.page+=1
+			if (this.page > this.last_page) {
+				return false
+			}
+  			this.loading = true
+			this.pageGet()
 		}
 	}
 
