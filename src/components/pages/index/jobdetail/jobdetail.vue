@@ -2,7 +2,7 @@
  @import 'item.css'
 </style>
 <template>
-	<div id="jobdetail " v-loading="loadding" :style="{'height':fullHeight+'px'}">
+	<div id="jobdetail ">
 		<div class="w_100 pl35 pr35 box_border">
 			<div class="w_100 bt_b">
 				<div class="w_100 jub_jub_center pt60 pb25 ">
@@ -104,14 +104,25 @@ export default {
 	data () {
 		return {
 			fullHeight: document.documentElement.clientHeight,
-			loadding:true
+			detail:{}
 		}
 	},
 	mounted(){
+		console.log(this.$route.query.id)
+		this.pageGet()
 	},
 	methods:{
 		jump(path){
 			this.$router.push({name:path})
+		},
+		pageGet(){
+			let data = {}
+
+			$http.get($utill.api.url + 'api/job/'+this.$route.query.id).then( res => {
+				 	this.detail = res.data.data
+			 }).catch(res => {
+				console.log(res)
+			 })
 		}
 	}
 
