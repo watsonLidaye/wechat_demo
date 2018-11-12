@@ -28,11 +28,13 @@
           <div class="ft40 color_333">推荐状态</div>
           <div class="line"></div>
         </div>
-        <div class="stage_wrapper">
-          <div class="stage_1 stage_item">
+        <!-- 进度 -->
+        <div class="steps_wrapper">
+          <div class="stage_1 steps_item">
             <div class="relative">
               <img src="./image/ico_success@2x.png"
                    class="icon_36">
+              <div class="steps_line"></div>
             </div>
             <span class="ft32 color_333 ml20">已报名</span>
           </div>

@@ -106,13 +106,14 @@
 .color_blue {
   color: #80b3f4;
 }
+/* steps */
 .line {
   height: 1px;
   background: #e2e2ee;
   width: 4.92rem;
   box-sizing: border-box;
 }
-.stage_item {
+.steps_item {
   width: 4.63rem;
   height: 1.06rem;
   line-height: 1.06rem;
@@ -120,18 +121,23 @@
   border-radius: 0.14rem;
   display: flex;
   align-items: center;
-  padding-left: 0.42rem;
   box-sizing: border-box;
-}
-.stage_item::before {
-  position: absolute;
-  content: '';
-  width: 0.02rem;
-  height: 1.7rem;
-  background: #3fdc98;
+  padding-left: 0.42rem;
 }
 .icon_36 {
   width: 0.36rem;
   height: 0.36rem;
   display: inline-block;
+}
+.steps_line {
+  position: absolute;
+  top: 0.71rem;
+  bottom: 0;
+  left: 0.18rem;
+  display: block;
+  width: 0.02rem;
+  height: 1.7rem;
+  border-color: inherit;
+  /* background: #3fdc98; */
+  background: #c0c4cc;
 }
