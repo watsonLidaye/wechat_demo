@@ -11,9 +11,11 @@
 .input_box{
 	width: 6.8rem;
 	height: .9rem;
+	margin: 0 auto .3rem;
+}
+.input_box_intput{
 	border:1px solid rgba(226, 226, 226, 1);
 	border-radius:.14rem;
-	margin: 0 auto .3rem;
 }
 .seatching{
 	font-size: .3rem;
@@ -82,9 +84,12 @@
 }
 .w680{
 	width: 6.8rem;
-	margin: 0 auto;
+	margin: 0 auto .25rem;
 	border-radius: .14rem;
 }
 .color_99{
 	color: #999;
+}
+.bg_ff{
+	background: #fff;
 }

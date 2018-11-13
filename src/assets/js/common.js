@@ -115,7 +115,7 @@ function alertOp(info) {
 	使用es6 .then方法请求ajax
 */
 
-function chcktoken() {
+function checktoken() {
 	return new Promise((resolve, reject) => {
 		let curentTime = Date.parse(new Date())
 		if (curentTime - Lockr.get('time').tokenrecode <= Lockr.get('time').expires_in * 1000) {
@@ -154,6 +154,6 @@ export default {
 	cloneJson,
 	IEVersion,
 	alertOp,
-	chcktoken,
+	checktoken,
 	shareMethods
 }

@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- panel -->
-    <div class="user_panel">
+    <div class="user_panel" :style="{'min-height':fullHeight+'px'}">
       <!-- hd -->
       <div class="user_hd mb15">
         <!-- user -->
         <div class="user_info">
           <div>
-            <h3 class="user_name mb25">{{name}}<img v-if="sex === 1"
+            <h3 class="user_name mb25">{{detail.name}}<img v-if="sex === 1"
                    class="icon_30 ml15"
                    src="./image/ico_nan.png"><img v-else
                    class="icon_30 ml15"
@@ -18,7 +18,7 @@
             </router-link>
           </div>
           <img class="user_avatar"
-               :src="headimgurl">
+               v-lazy="detail.avatar">
         </div>
       </div>
       <!-- mian -->
@@ -76,25 +76,38 @@
     </div>
   </div>
 </template>
-<script type='text/ecmascript-6'>
+<script>
 export default {
   name: 'my',
   data () {
     return {
+      fullHeight: document.documentElement.clientHeight,
       id: '',
       name: 'Leslie Cheung',
       sex: 2,
-      headimgurl: 'https://avatars2.githubusercontent.com/u/39576364?s=460&v=4'
+      headimgurl: 'https://avatars2.githubusercontent.com/u/39576364?s=460&v=4',
+      detail:{},
     }
   },
   created () { },
   mounted () {
-    // console.log(this.$route)
-    // this.$router.push({
-    //   path: '/mine/mineInfo'
-    // })
+    $utill.common.checktoken().then(this.pageGet())
   },
-  methods: {},
+  methods: {
+    pageGet(){
+      let data = {}
+      data.page = this.page
+       $http.get($utill.api.url + 'api/users',{
+        headers:{
+          'Authorization':Lockr.get('token_type') + ' ' + Lockr.get('token')
+        }
+       }).then( res => {
+          this.detail = res.data.data
+       }).catch(res => {
+        console.log(res)
+       })
+    },
+  },
   computed: {},
   destroyed () { }
 }

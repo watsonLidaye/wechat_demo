@@ -36,6 +36,17 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
+  switch (to.path) {
+    case '/':
+      $store.commit('tabbas', 'index')
+      break
+    case '/my':
+      $store.commit('tabbas', 'my')
+      break
+    default:
+      $store.commit('tabbas', 'none')
+      break
+  }
   wx.ready(function() {
     // wx.hideMenuItems({
     //   menuList: ['menuItem:copyUrl'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3

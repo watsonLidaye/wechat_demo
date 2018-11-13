@@ -4,10 +4,8 @@
 @import './assets/css/commons.css';
 
 .app {
-  font-family: 'PingFang SC';
-  font-family: 'DIN';
 }
-.slide-fade {
+/*.slide-fade {
   position: absolute;
   left: 0;
   right: 0;
@@ -24,28 +22,26 @@
   right: 0;
   transform: translateX(50px);
   opacity: 0;
-}
-.header_info {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  z-index: 100;
-}
+}*/
 </style>
 <template>
   <div id="app"
        class="app">
-    <transition name="slide-fade"
-                mode="out-in">
-      <router-view class="child-view"></router-view>
-    </transition>
+        <transition name="slide-fade"
+                    mode="out-in">
+          <router-view class="child-view"></router-view>
+        </transition>
+    <tabbas act="index"></tabbas>
   </div>
 </template>
 
 <script>
-
+import tabbas from './components/common/tabbas/tabbas.vue'
 export default {
   name: 'App',
+  components:{
+    tabbas
+  },
   data () {
     return {
       login_success: true

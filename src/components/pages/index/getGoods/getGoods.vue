@@ -7,33 +7,35 @@
 	 			<img src="./image/ico_youjiang@2x.png" class="w112h112 ml35">
 	 			<div class="ft48 ml25">有奖 <span class="color_FA846C">专区</span></div>
 	 		</div>
- 			<div class="input_box bg_ff relative mb30">
- 				<input type="text" name="" class="w_100 h_100 text_center" placeholder="请输入职位或者公司名">
+ 			<div class="input_box  relative mb30">
+ 				<input type="text" name="" class="w_100 h_100 text_center bg_ff input_box_intput" placeholder="请输入职位或者公司名">
  				<div class="el-icon-search seatching"></div>
  			</div>
- 			<router-link to="/jobdetail" class="block relative w680 pd30 box_border pb15 bg_ff mb25">
+ 			<div  v-infinite-scroll="loadMore" infinite-scroll-distance="0" class="pb50">
+ 			<router-link :to="'/jobdetail?id='+item.company_id" class="block relative w680 pd30 box_border pb15 bg_ff  " v-for="(item,index) in list" :key="index+'list'">
 				<div class="w_100 jub_jub_center mb25">
 					<div class="ft30 flex_align ">
-						<div>操作工</div>
-						<div class="ml20 label_price">有奖</div>
+						<div>{{item.name}}</div>
+						<div class="ml20 label_price" v-if="item.category==1">有奖</div>
 					</div>
-					<div class="ft24 index_money">3000-8000元</div>
+					<div class="ft24 index_money">{{item.salary_begin}}-{{item.salary_end}}元</div>
 				</div>
 				<div class="flex_warp w_100 mb25">
 					<div class="label_index">五险</div>
 					<div class="label_index">包吃</div>
 				</div>
 				<div class="flex_align">
-					<div class="logo_img mr15"></div>
+					<img class="logo_img mr15" v-lazy="item.company.logo">
 					<div class="logo_img_height juc_colum_b">
 						<div>
-							<div class="ft22 mb15">富士康</div>
-							<div class="ft22 color_99">已报名 22 人</div>
+							<div class="ft22 mb15">{{item.company.name}}</div>
+							<div class="ft22 color_99">已报名 {{item.user_enrolls_count}} 人</div>
 						</div>
 					</div>
 				</div>
 				<img src="./image/置顶@2x.png" class="top">
 			</router-link>
+			</div>
 
 	</div>
 </template>
@@ -45,11 +47,41 @@ export default {
 	data () {
 		return {
 			fullHeight: document.documentElement.clientHeight,
+			list:[],
+			page:1,
 		}
 	},
 	mounted(){
+		this.pageGet()
+	},
+	methods:{
+		pageGet(){
+			let data = {}
+			data.page = this.page
+			 $http.get($utill.api.url + 'api/job/reward').then( res => {
+			 	if (this.page == 1) {
+			 		this.list = res.data.data.data
+			 	} else {
+					for (let i in res.data.data.data) {
+						this.list.push(res.data.data.data[i])
+					}
+			 	}
+				this.last_page = res.data.data.last_page
+			 }).catch(res => {
+				console.log(res)
+			 })
+		},
+		loadMore() {
+			if (this.list.length==0) {
+				return false
+			}
+			this.page+=1
+			if (this.page > this.last_page) {
+				return false
+			}
+			this.pageGet()
+		}
 	}
-
 
 }
 </script>

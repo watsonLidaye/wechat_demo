@@ -28,7 +28,7 @@
     </div>
   </div>
 </template>
-<script type='text/ecmascript-6'>
+<script>
 export default {
   name: 'myWork',
   data () {
@@ -54,7 +54,36 @@ export default {
   },
   created () { },
   mounted () { },
-  methods: {},
+  methods: {
+    pageGet(){
+      let data = {}
+      data.page = this.page
+       $http.get($utill.api.url + '').then( res => {
+        if (this.page == 1) {
+          this.list = res.data.data.data
+        } else {
+          for (let i in res.data.data.data) {
+            this.list.push(res.data.data.data[i])
+          }
+        }
+        this.last_page = res.data.data.last_page
+        this.loading = false
+       }).catch(res => {
+        console.log(res)
+       })
+    },
+    loadMore() {
+      if (this.list.length==0) {
+        return false
+      }
+      this.page+=1
+      if (this.page > this.last_page) {
+        return false
+      }
+        this.loading = true
+      this.pageGet()
+    }
+  },
   computed: {},
   destroyed () { }
 }

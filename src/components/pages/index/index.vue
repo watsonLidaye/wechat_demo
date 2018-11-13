@@ -42,7 +42,7 @@
 						<div class="w_100 jub_jub_center mb25">
 							<div class="ft30 flex_align ">
 								<div>{{item.name}}</div>
-								<div class="ml20 label_price" v-if="item.is_reward!=0">有奖</div>
+								<div class="ml20 label_price" v-if="item.category==1">有奖</div>
 							</div>
 							<div class="ft24 index_money">{{item.salary_begin}}-{{item.salary_end}}元</div>
 						</div>
@@ -65,17 +65,13 @@
 				</template>
 			</div>
 		</div>
-		<tabbas></tabbas>
 	</div>
 </template>
 
 <script>
-import tabbas from '../../common/tabbas/tabbas.vue'
+
 export default {
 	name: 'index',
-	components:{
-		tabbas
-	},
 	data () {
 		return {
 			fullHeight: document.documentElement.clientHeight,
@@ -86,6 +82,7 @@ export default {
 		}
 	},
 	mounted(){
+		this.bannerGet()
 		this.pageGet()
 	},
 	methods:{

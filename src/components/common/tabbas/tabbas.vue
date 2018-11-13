@@ -2,15 +2,25 @@
  @import 'item.css'
 </style>
 <template>
-	<div  >
-		<div class="tabbas flex_align">
+	<div>
+		<div class="tabbas flex_align" v-if="state!='none'">
 			<div class="w_50 juc_colum_b ft20" @click="jump('index')">
-				<img src="./image/ico_home_select@2x.png" class="w46h46 mb10">
-				<div class="tabact">首页</div>
+				<template v-if="state=='index'">
+					<img src="@/assets/image/ico_home_select@2x.png" class="w46h46 mb10">
+				</template>
+				<template v-else>
+					<img src="@/assets/image/ico_home_normal@2x.png" class="w46h46 mb10">
+				</template>
+				<div class="color_99" :class="{'tabact':state=='index'}">首页</div>
 			</div>
 			<div class="w_50 juc_colum_b ft20" @click="jump('my') ">
-				<img src="./image/ico_my_normal@2x.png" class="w46h46 mb10">
-				<div class="color_99">我的</div>
+				<template v-if="state=='my'">
+					<img src="@/assets/image/ico_my_select@2x.png" class="w46h46 mb10">
+				</template>
+				<template v-else>
+					<img src="@/assets/image/ico_my_normal@2x.png" class="w46h46 mb10">
+				</template>
+				<div class="color_99" :class="{'tabact':state=='my'}">我的</div>
 			</div>
 		</div>
 	</div>
@@ -25,13 +35,24 @@ export default {
 			fullHeight: document.documentElement.clientHeight,
 		}
 	},
+	props:{
+		act:{
+			type:String,
+			value:'index'
+		}
+	},
 	mounted(){
 	},
 	methods:{
 			jump(path){
 				this.$router.push({name:path})
 			}
+	},
+	computed:{
+		state(){
+			return $store.state.tabbas
 		}
+	}
 
 
 }
