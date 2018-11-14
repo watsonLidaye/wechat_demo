@@ -15,6 +15,7 @@ import accountDetail from '@/components/pages/my/myAccount/accountDetail/index'
 import accountSetting from '@/components/pages/my/myAccount/accountSetting/index'
 import myBorrow from '@/components/pages/my/myBorrow/index'
 import borrowSubmit from '@/components/pages/my/borrowSubmit/index'
+import share from '@/components/pages/index/share/share'
 
 const routes = [{
 	path: '/',
@@ -22,6 +23,13 @@ const routes = [{
 	component: index,
 	meta: {
 		pageTitle: '翔通集团'
+	}
+}, {
+	path: '/share',
+	name: 'share',
+	component: share,
+	meta: {
+		pageTitle: '我的专属二维码'
 	}
 }, {
 	path: '/inputfile',
