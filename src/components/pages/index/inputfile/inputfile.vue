@@ -4,7 +4,7 @@
 <template>
 	<div id="inputfile"  :style="{'min-height':fullHeight+'px'}">
 		<div class="header relative mb50">
-			<img src="./image/img_one@2x.png" class="w327h101 ml35">
+			<img src="@/assets/image/index/img_one.png" class="w327h101 ml35">
 				<input type="text" class="header_input_name ft30 box_border pl40 header_input" placeholder="姓名" maxlength="10">
 		</div>
 		<div class="w680 jub_jub_center pb48">
@@ -13,7 +13,7 @@
 			</div>
 			<div class="sex_age jub_jub_center" @click="setselect">
 				<div class="ft30 ml45">性别 </div>
-				<img src="./image/arrow_down@2x.png" class="w36h36 mr40">
+				<img src="@/assets/image/index/arrow_down.png" class="w36h36 mr40">
 			</div>
 		</div>
 		<div class="pb48 w680">

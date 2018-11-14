@@ -35,10 +35,10 @@
 				</div>
 				<div class="w_100  srcoll">
 					<div class="bto_box">
-					<img src="./image/top@2x.png"  class="bottom_img mr25">
-					<img src="./image/top@2x.png"  class="bottom_img mr25">
-					<img src="./image/top@2x.png"  class="bottom_img mr25">
-					<img src="./image/top@2x.png"  class="bottom_img mr25">
+					<img src="@/assets/image/index/top.png"  class="bottom_img mr25">
+					<img src="@/assets/image/index/top.png"  class="bottom_img mr25">
+					<img src="@/assets/image/index/top.png"  class="bottom_img mr25">
+					<img src="@/assets/image/index/top.png"  class="bottom_img mr25">
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				</div>
 				<div class="w_100 ">
 					<div class="flex_align mb25">
-						<img src="./image/gs_zb@2x.png" class="w22h26 mr20">
+						<img src="@/assets/image/index/gs_zb.png" class="w22h26 mr20">
 						<div class="ft28">广东 - 深圳 - 南山区</div>
 					</div>
 					<div class="color_99 ft24">

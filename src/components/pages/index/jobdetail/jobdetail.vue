@@ -11,7 +11,7 @@
 						<div class="price ft28 ">{{detail.salary_begin}}-{{detail.salary_end}}元</div>
 					</div>
 					<div class="w_100 flex_align  mb30 ">
-						<img src="./image/zb@2x.png" class="w20h24 mr10">
+						<img src="@/assets/image/index/zb.png" class="w20h24 mr10">
 						<div class="color_99 ft28">{{detail.province.name}}{{detail.province.suffix}}-{{detail.city.name}}{{detail.city.suffix}}-{{detail.district.name}}{{detail.district.suffix}}-{{detail.address}}</div>
 					</div>
 				</div>
@@ -27,12 +27,12 @@
 							</div>
 						</div>
 					</div>
-					<img src="./image/arrow@2x.png" class="w32h32 mr35">
+					<img src="@/assets/image/index/arrow.png" class="w32h32 mr35">
 				</router-link>
 				<div class="w724h173">
 					<div class="w684h184">
 						<div>
-							<img src="./image/tjyj@2x.png" class="w119h22">
+							<img src="@/assets/image/index/tjyj.png" class="w119h22">
 						</div>
 						<div class="ft24 color_ff">.入职7天返现 700 元。</div>
 						<div class="ft24 color_ff">.推荐他人入职，确认入职工作7天，返现700元（可提现）</div>
@@ -84,13 +84,13 @@
 			<div class="bto_bar flex_align box_border pl35">
 				<div class="left_btn box_border juc_colum_b mr15">
 					<div class="flex_align ">
-						<img src="./image/gift_btn@2x.png" class="w32h32 mr10">
+						<img src="@/assets/image/index/gift_btn.png" class="w32h32 mr10">
 						<div class="ft30">有奖推荐</div>
 					</div>
 				</div>
 				<div class="rightbtn juc_colum_b" @click="jump('inputfile')">
 					<div class="flex_align ">
-						<img src="./image/sign up_btn@2x.png" class="w32h32 mr10">
+						<img src="@/assets/image/index/sign up_btn.png" class="w32h32 mr10">
 						<div class="ft30 color_ff">在线报名</div>
 					</div>
 				</div>

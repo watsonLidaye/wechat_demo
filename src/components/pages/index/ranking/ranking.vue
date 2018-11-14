@@ -15,9 +15,9 @@
 	 							<div class="flex_align">
 	 								<div class="index_number ft40 mr30" :class="{'color_one':index==0,'color_two':index==1,'color_three':index==2}">{{index+1}}</div>
 	 								<div class="w80h80 relative"  :class="{'color_one':index==0,'color_two':index==1,'color_three':index==2}">
-	 									<img src="./image/no_1@2x.png" v-if="index==0" class="w30h30">
-	 									<img src="./image/no_2@2x.png" v-if="index==1" class="w30h30">
-	 									<img src="./image/no_3@2x.png" v-if="index==2" class="w30h30">
+	 									<img src="@/assets/image/index/no_1.png" v-if="index==0" class="w30h30">
+	 									<img src="@/assets/image/index/no_2.png" v-if="index==1" class="w30h30">
+	 									<img src="@/assets/image/index/no_3.png" v-if="index==2" class="w30h30">
 	 								</div>
 	 								<div class="ml25 ft30">Leslie Cheung</div>
 	 							</div>

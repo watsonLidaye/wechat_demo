@@ -4,7 +4,7 @@
 <template>
 	<div id="getGoods" :style="{'min-height':fullHeight+'px'}">
 	 		<div class="w_100 h208 flex_align" >
-	 			<img src="./image/ico_youjiang@2x.png" class="w112h112 ml35">
+	 			<img src="@/assets/image/index/ico_youjiang.png" class="w112h112 ml35">
 	 			<div class="ft48 ml25">有奖 <span class="color_FA846C">专区</span></div>
 	 		</div>
  			<div class="input_box  relative mb30">
@@ -33,7 +33,7 @@
 						</div>
 					</div>
 				</div>
-				<img src="./image/置顶@2x.png" class="top">
+				<img src="@/assets/image/index/置顶.png" class="top">
 			</router-link>
 			</div>
 

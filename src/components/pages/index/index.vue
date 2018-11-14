@@ -17,19 +17,19 @@
 		<div class="headnav flex_align">
 			<div class='w_33 h24 juc_colum' @click="jump('getGoods')">
 				<div class="flex_align">
-					<img src="./image/奖品@2x.png" class="w32h32 mr15">
+					<img src="@/assets/image/index/奖品.png" class="w32h32 mr15">
 					<div class="">有奖专区</div>
 				</div>
 			</div>
 			<div class='w_33 h24 juc_colum' @click="jump('recruit')">
 				<div class="flex_align">
-					<img src="./image/名企@2x.png" class="w32h32 mr15">
+					<img src="@/assets/image/index/名企.png" class="w32h32 mr15">
 					<div class="">名企招聘</div>
 				</div>
 			</div>
 			<div class='w_33 h24 juc_colum'  @click="jump('ranking')">
 				<div class="flex_align">
-					<img src="./image/榜单@2x.png" class="w32h32 mr15">
+					<img src="@/assets/image/index/榜单.png" class="w32h32 mr15">
 					<div class="">推荐榜单</div>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 								</div>
 							</div>
 						</div>
-						<img src="./image/置顶@2x.png" class="top">
+						<img src="@/assets/image/index/置顶.png" class="top">
 					</router-link>
 					<div class="navbto" :key="index+'bot'"></div>
 				</template>

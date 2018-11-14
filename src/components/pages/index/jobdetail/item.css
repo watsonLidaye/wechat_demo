@@ -41,7 +41,7 @@
 .w684h184{
 	width: 6.84rem;
 	height: 1.84rem;
-	background: url('./image/tjyj_frame@2x.png');
+	background: url('../../../../assets/image/index/tjyj_frame.png');
 	background-repeat: no-repeat;
 	background-size: 6.8rem 1.84rem;
 	padding:0rem .4rem .2rem;
@@ -54,7 +54,7 @@
 	width: 7.24rem;
 	height: 1.73rem;
 	margin: 0 auto;
-	background: url('./image/红框阴影图层@2x.png');
+	background: url('../../../../assets/image/index/红框阴影图层.png');
 	background-repeat: no-repeat;
 	background-size: 6.8rem 1.84rem;
 	margin: 0 auto
@@ -103,7 +103,7 @@
 	width: 100%;
 	height: .25rem;  
 	margin: 0 auto;
-	background: url('./image/底栏阴影图层@2x.png');
+	background: url('../../../../assets/image/index/底栏阴影图层.png');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }

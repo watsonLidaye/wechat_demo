@@ -8,7 +8,7 @@
 .header{
 	width: 100%;
 	height: 3.73rem;
-	background-image: url('./image/bg_up@2x.png');
+	background-image: url('../../../../assets/image/index/bg_up.png');
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	line-height: 3.73rem;
