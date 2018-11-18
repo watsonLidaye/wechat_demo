@@ -51,8 +51,39 @@ export default {
     return {}
   },
   created () { },
-  mounted () { },
-  methods: {},
+  mounted () {
+    this.pageGet()
+  },
+  methods: {
+    pageGet () {
+      let _this = this
+      let options = {
+        method: 'get',
+        url: $utill.api.url + 'api/users/recommendation',
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
+        },
+        data: {
+          page: ''
+        }
+      }
+      $http.request(options).then(res => {
+        console.log(res)
+        // if (this.page == 1) {
+        //   this.list = res.data.data.data
+        //   console.log(this.list)
+        // } else {
+        //   for (let i in res.data.data.data) {
+        //     this.list.push(res.data.data.data[i])
+        //   }
+        // }
+        // this.last_page = res.data.data.last_page
+        // this.loading = false
+      }).catch(res => {
+        // console.log(res)
+      })
+    },
+  },
   computed: {},
   destroyed () { }
 }

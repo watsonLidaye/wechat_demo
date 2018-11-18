@@ -101,8 +101,36 @@ export default {
   },
   created () { },
   mounted () {
+    let _this = this
+    $utill.common.checktoken().then(_this.pageGet())
   },
-  methods: {},
+  methods: {
+    pageGet () {
+      let _this = this
+      let options = {
+        method: 'get',
+        url: $utill.api.url + 'api/users/account',
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
+        }
+      }
+      $http.request(options).then(res => {
+        console.log(res)
+        // if (this.page == 1) {
+        //   this.list = res.data.data.data
+        //   console.log(this.list)
+        // } else {
+        //   for (let i in res.data.data.data) {
+        //     this.list.push(res.data.data.data[i])
+        //   }
+        // }
+        // this.last_page = res.data.data.last_page
+        // this.loading = false
+      }).catch(res => {
+        // console.log(res)
+      })
+    }
+  },
   computed: {
 
   },

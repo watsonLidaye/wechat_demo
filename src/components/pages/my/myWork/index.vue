@@ -49,18 +49,32 @@ export default {
           time: '2018.10.31',
           status: 2
         }
-      ]
+      ],
+      page: '',
+      list: ''
     }
   },
   created () { },
-  mounted () { },
+  mounted () {
+    $utill.common.checktoken().then(this.pageGet())
+  },
   methods: {
-    pageGet(){
-      let data = {}
-      data.page = this.page
-       $http.get($utill.api.url + '').then( res => {
+    pageGet () {
+      let _this = this
+      let options = {
+        method: 'get',
+        url: $utill.api.url + 'api/users/work',
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
+        },
+        data: {
+          page: ''
+        }
+      }
+      $http.request(options).then(res => {
         if (this.page == 1) {
           this.list = res.data.data.data
+          console.log(this.list)
         } else {
           for (let i in res.data.data.data) {
             this.list.push(res.data.data.data[i])
@@ -68,19 +82,19 @@ export default {
         }
         this.last_page = res.data.data.last_page
         this.loading = false
-       }).catch(res => {
+      }).catch(res => {
         console.log(res)
-       })
+      })
     },
-    loadMore() {
-      if (this.list.length==0) {
+    loadMore () {
+      if (this.list.length == 0) {
         return false
       }
-      this.page+=1
+      this.page += 1
       if (this.page > this.last_page) {
         return false
       }
-        this.loading = true
+      this.loading = true
       this.pageGet()
     }
   },

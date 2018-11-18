@@ -88,7 +88,7 @@ const routes = [{
 		pageTitle: '我的信息'
 	}
 }, {
-	path: '/myWork',
+	path: '/myWork/:id',
 	name: 'myWork',
 	component: myWork,
 	meta: {

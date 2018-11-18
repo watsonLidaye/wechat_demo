@@ -1,13 +1,14 @@
 <template>
   <div>
     <!-- panel -->
-    <div class="user_panel" :style="{'min-height':fullHeight+'px'}">
+    <div class="user_panel"
+         :style="{'min-height':fullHeight+'px'}">
       <!-- hd -->
       <div class="user_hd mb15">
         <!-- user -->
         <div class="user_info">
           <div>
-            <h3 class="user_name mb25">{{detail.name}}<img v-if="sex === 1"
+            <h3 class="user_name mb25">{{userInfo.name}}<img v-if="userInfo.sex === 1"
                    class="icon_30 ml15"
                    src="./image/ico_nan.png"><img v-else
                    class="icon_30 ml15"
@@ -18,14 +19,14 @@
             </router-link>
           </div>
           <img class="user_avatar"
-               v-lazy="detail.avatar">
+               v-lazy="userInfo.avatar">
         </div>
       </div>
       <!-- mian -->
       <div class="user_main">
         <!-- operation -->
         <div class="user_operation">
-          <router-link to="/myWork">
+          <router-link :to="{ name: 'myWork', params: { id: userInfo.id }}">
             <div class="operation_item">
               <img class="icon_60 mr25"
                    src="./image/ico_work.png">
@@ -82,11 +83,17 @@ export default {
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
-      id: '',
-      name: 'Leslie Cheung',
-      sex: 2,
-      headimgurl: 'https://avatars2.githubusercontent.com/u/39576364?s=460&v=4',
-      detail:{},
+      userInfo: {
+        age: '',
+        avatar: '',
+        bank_card: '',
+        bank_code: '',
+        id: '',
+        idcard: '',
+        name: '',
+        phone: '',
+        sex: ''
+      },
     }
   },
   created () { },
@@ -94,18 +101,19 @@ export default {
     $utill.common.checktoken().then(this.pageGet())
   },
   methods: {
-    pageGet(){
+    pageGet () {
       let data = {}
       data.page = this.page
-       $http.get($utill.api.url + 'api/users',{
-        headers:{
-          'Authorization':Lockr.get('token_type') + ' ' + Lockr.get('token')
+      $http.get($utill.api.url + 'api/users', {
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
         }
-       }).then( res => {
-          this.detail = res.data.data
-       }).catch(res => {
-        console.log(res)
-       })
+      }, data).then(res => {
+        console.log(res.data.data)
+        this.userInfo = res.data.data
+      }).catch(res => {
+        // console.log(res)
+      })
     },
   },
   computed: {},

@@ -2,5 +2,7 @@
     "emmet.syntaxProfiles": {
         "vue-html": "html",
         "vue": "html"
-      }
+    },
+    "editor.fontSize": 16,
+    "editor.fontWeight": "500"
 }
