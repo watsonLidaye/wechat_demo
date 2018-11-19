@@ -56,14 +56,16 @@
               </div>
             </div>
           </router-link>
-          <div class="operation_item">
-            <img class="icon_60 mr25"
-                 src="./image/ico_jieqian.png">
-            <div class="w_100 operation_item_r border_e2e2e2">
-              我要借钱<img class="icon_30"
-                   src="./image/arrow_1.png">
+          <router-link to="/myBorrow">
+            <div class="operation_item">
+              <img class="icon_60 mr25"
+                   src="./image/ico_jieqian.png">
+              <div class="w_100 operation_item_r border_e2e2e2">
+                我要借钱<img class="icon_30"
+                     src="./image/arrow_1.png">
+              </div>
             </div>
-          </div>
+          </router-link>
           <div class="operation_item">
             <img class="icon_60 mr25"
                  src="./image/ico_kefu.png">
@@ -83,17 +85,7 @@ export default {
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
-      userInfo: {
-        age: '',
-        avatar: '',
-        bank_card: '',
-        bank_code: '',
-        id: '',
-        idcard: '',
-        name: '',
-        phone: '',
-        sex: ''
-      },
+      userInfo: {}
     }
   },
   created () { },
@@ -102,19 +94,20 @@ export default {
   },
   methods: {
     pageGet () {
-      let data = {}
-      data.page = this.page
-      $http.get($utill.api.url + 'api/users', {
+      let _this = this
+      let options = {
+        method: 'get',
+        url: $utill.api.url + 'api/users',
         headers: {
-          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
         }
-      }, data).then(res => {
-        console.log(res.data.data)
+      }
+      $http.request(options).then(res => {
         this.userInfo = res.data.data
       }).catch(res => {
-        // console.log(res)
+        console.log(res)
       })
-    },
+    }
   },
   computed: {},
   destroyed () { }

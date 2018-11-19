@@ -17,13 +17,14 @@
                    type="number"
                    min="10"
                    max="1000"
+                   v-model="amount"
                    placeholder="借款金额(100-1000)">
           </div>
         </div>
         <div class="borrow_info pl35 pr35 box_border bg_fff">
           <div class="flex flex_h_between flex_1 pt40 pb40 ft32 border_e2e2e2 box_border">
             <span class="color_333">借款用途</span>
-            <span class="color_333">个人日常消费</span>
+            <span class="color_333">{{borrow_remark}}</span>
           </div>
           <div class="flex flex_h_between flex_1 pt40 pb40 ft32 border_e2e2e2 box_border">
             <span class="color_333">开户银行</span>
@@ -46,14 +47,53 @@ export default {
   name: 'myBorrow',
   data () {
     return {
-      fullHeight: document.documentElement.clientHeight
+      fullHeight: document.documentElement.clientHeight,
+      amount: 10,
+      borrow_remark: '日常消费'
     }
   },
   created () { },
   mounted () {
-    console.log(this.fullHeight)
+    this.getUserInfo()
   },
-  methods: {},
+  methods: {
+    getUserInfo () {
+      let _this = this
+      let options = {
+        method: 'get',
+        url: $utill.api.url + 'api/users/account',
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
+        }
+      }
+      $http.request(options).then(res => {
+        console.log(res)
+        this.withdraw_visible = false
+      }).catch(res => {
+        console.log(res)
+      })
+    },
+    borrowMoney () {
+      let _this = this
+      let options = {
+        method: 'get',
+        url: $utill.api.url + 'api/user/borrow',
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
+        },
+        data: {
+          amount: _this.amount,
+          borrow_remark: _this.borrow_remark
+        }
+      }
+      $http.request(options).then(res => {
+        console.log(res)
+        this.withdraw_visible = false
+      }).catch(res => {
+        console.log(res)
+      })
+    }
+  },
   computed: {},
   destroyed () { }
 }

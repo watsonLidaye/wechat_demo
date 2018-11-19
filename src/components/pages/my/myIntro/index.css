@@ -14,7 +14,6 @@
   border-radius: 0.14rem;
   padding: 0.24rem 0.42rem;
   box-sizing: border-box;
-  margin-bottom: 0.3rem;
   display: flex;
   justify-content: space-between;
 }
@@ -44,13 +43,6 @@
   display: inline-block;
   border-radius: 50%;
 }
-.color_f8f8f8 {
-  color: #f8f8f8;
-}
-.flex_v_center {
-  display: flex;
-  align-items: center;
-}
 .intro_status {
   font-size: 0.18rem;
   background: rgba(255, 255, 255, 1);
@@ -65,4 +57,18 @@
 }
 .color_blue {
   color: #80b3f4;
+}
+.reward_num {
+  font-size: 0.8rem;
+  font-family: DINCond-Bold;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 1);
+}
+.intro_reward {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }

@@ -27,10 +27,11 @@
         </div>
         <div class="input_wrap border_e2e2e2">
           <label class="block input_label">性别</label>
-          <input class="input_val w_100"
-                 type="text"
-                 v-model="userInfo.sex"
-                 placeholder="请选择性别">
+          <el-radio-group class="input_val"
+                          v-model="userInfo.sex">
+            <el-radio :label="1">男</el-radio>
+            <el-radio :label="2">女</el-radio>
+          </el-radio-group>
         </div>
         <div class="input_wrap">
           <label class="block input_label">身份证号码</label>
@@ -70,16 +71,26 @@ export default {
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
+      sexOptions: [
+        {
+          label: '男',
+          value: '1'
+        },
+        {
+          label: '女',
+          value: '2'
+        }
+      ],
       userInfo: {
-        age: '',
-        avatar: '',
-        id: '',
-        idcard: '',
-        name: '',
-        phone: '',
-        sex: '',
-        verification_code: '',
-        verification_key: ''
+        id: 2,
+        name: '薄博涛',
+        age: 57,
+        sex: 1,
+        avatar: 'https://lorempixel.com/200/200/?69252',
+        idcard: null,
+        phone: 13230250636,
+        bank_code: null,
+        bank_card: null
       }
     }
   },
@@ -88,7 +99,9 @@ export default {
     $utill.common.checktoken().then(this.pageGet())
   },
   methods: {
+    // 获取用户信息
     pageGet () {
+      let _this = this
       let options = {
         method: 'get',
         url: $utill.api.url + 'api/users',
@@ -102,6 +115,7 @@ export default {
         console.log(res)
       })
     },
+    // 获取登录验证码和短信凭证
     authCodeGet () {
       let _self = this
       let options = {
@@ -115,12 +129,9 @@ export default {
         }
       }
       $http.request(options).then(res => {
-        if (res.data.code === 1) {
-          this.userInfo.verification_key = res.data.data.key
-        }
-        console.log(this.userInfo)
+        this.userInfo.verification_key = res.data.data.key
       }).catch(res => {
-        // console.log(res)
+        console.log(res)
       })
     },
     // 修改用户信息

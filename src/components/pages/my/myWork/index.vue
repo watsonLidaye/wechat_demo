@@ -2,21 +2,21 @@
   <div>
     <div class="work_panel">
       <div class="work_list">
-        <div v-for="(work_item,work_index) in myWork"
-             :key="work_index"
+        <div v-for="(list_item,list_index) in list"
+             :key="list_index"
              class="work_item mb25">
           <div class="work_avatar">
-            <img src="//cdn2.jianshu.io/assets/default_avatar/11-4d7c6ca89f439111aff57b23be1c73ba.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+            <img :src="list_item.company.logo"
                  class="w116h116">
           </div>
           <div class="item_r ml30">
             <div class="work_info">
-              <h3 class="info_type">{{work_item.type === 1? '普工': 'CEO'}}</h3>
+              <h3 class="info_type">{{list_item.job.name}}</h3>
               <p class="info_describe mb10"
-                 v-if="work_item.status === 1">入职时间：2018.10.31</p>
-              <p class="info_describe">{{company_name}}</p>
+                 v-if="list_item.status === 1">入职时间：{{list_item.updated_at}}</p>
+              <p class="info_describe">{{list_item.company.name}}</p>
             </div>
-            <img v-if="work_item.status === 1"
+            <img v-if="list_item.status === 1"
                  src="./image/register@2x.png"
                  class="work_status">
             <img v-else
