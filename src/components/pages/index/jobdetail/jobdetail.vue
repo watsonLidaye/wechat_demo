@@ -12,14 +12,14 @@
 					</div>
 					<div class="w_100 flex_align  mb30 ">
 						<img src="@/assets/image/index/zb.png" class="w20h24 mr10">
-						<div class="color_99 ft28">{{detail.province.name}}{{detail.province.suffix}}-{{detail.city.name}}{{detail.city.suffix}}-{{detail.district.name}}{{detail.district.suffix}}-{{detail.address}}</div>
+						<div class="color_99 ft28">{{detail.province}}-{{detail.city}}-{{detail.district}}-{{detail.address}}</div>
 					</div>
 				</div>
 			</div>
 			<div class="w_100 mb40">
 				<router-link to="companyDetail" class="w_100 jub_jub_center pt60 pb70">
 					<div class="flex_align ml35">
-						<div class="logo_img mr15"></div>
+						<img class="logo_img mr15" :src="detail.company.logo">
 						<div class="logo_img_height juc_colum_b">
 							<div>
 								<div class="ft22 mb15">{{detail.company.name}}</div>
@@ -34,8 +34,8 @@
 						<div>
 							<img src="@/assets/image/index/tjyj.png" class="w119h22">
 						</div>
-						<div class="ft24 color_ff">.入职7天返现 700 元。</div>
-						<div class="ft24 color_ff">.推荐他人入职，确认入职工作7天，返现700元（可提现）</div>
+						<div class="ft24 color_ff">.入职7天返现 {{detail.had_rewards}} 元。</div>
+						<div class="ft24 color_ff">.推荐他人入职，确认入职工作{{detail.reward[0].days}}天，返现{{detail.reward[0].amount}}元（可提现）</div>
 						<div class="w_100 text_right ft20 color_ff">该职位已有{{detail.number}}人获得返现</div>
 					</div>
 				</div>
@@ -81,14 +81,22 @@
 			<div class="pb130">
 				<div class="mbbb"></div>
 			</div>
-			<div class="bto_bar flex_align box_border pl35">
-				<div class="left_btn box_border juc_colum_b mr15">
+			<div class="bto_bar flex_align box_border pl35"  v-if="!second_jump">
+				<div class="left_btn box_border juc_colum_b mr15"  @click="jump('share')">
 					<div class="flex_align ">
 						<img src="@/assets/image/index/gift_btn.png" class="w32h32 mr10">
 						<div class="ft30">有奖推荐</div>
 					</div>
 				</div>
 				<div class="rightbtn juc_colum_b" @click="jump('inputfile')">
+					<div class="flex_align ">
+						<img src="@/assets/image/index/sign up_btn.png" class="w32h32 mr10">
+						<div class="ft30 color_ff">在线报名</div>
+					</div>
+				</div>
+			</div>
+			<div class="bto_bar juc_colum_b box_border pl35"  v-if="second_jump">
+				<div class="rightbtn juc_colum_b" @click="jump('inputfile',user_id)">
 					<div class="flex_align ">
 						<img src="@/assets/image/index/sign up_btn.png" class="w32h32 mr10">
 						<div class="ft30 color_ff">在线报名</div>
@@ -107,15 +115,21 @@ export default {
 		return {
 			fullHeight: document.documentElement.clientHeight,
 			detail:{},
-			show_detail:false
+			show_detail:false,
+			second_jump:false,
+			user_id:''
 		}
 	},
 	mounted(){
+		if (this.$route.query.recommend) {
+				this.second_jump = true
+				this.user_id = this.$route.query.recommend
+			}
 		this.pageGet()
 	},
 	methods:{
 		jump(path){
-			this.$router.push({name:path})
+			this.$router.push({name:path,params:{user:this.userInfo,detail:this.detail,user_id:this.user_id}})
 		},
 		pageGet(){
 			let data = {}
@@ -123,11 +137,25 @@ export default {
 				if (res.data.data.length!=0) {
 					this.detail = res.data.data
 					this.show_detail = true
+					$utill.common.checktoken().then(this.getUser())
 				}
 			 }).catch(res => {
 				console.log(res)
 			 })
-		}
+		},
+		  getUser () {
+      let data = {}
+      data.page = this.page
+      $http.get($utill.api.url + 'api/users', {
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
+        }
+      }, data).then(res => {
+        this.userInfo = res.data.data
+      }).catch(res => {
+        // console.log(res)
+      })
+    },
 	}
 
 

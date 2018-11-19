@@ -8,7 +8,7 @@
 	 			<div class="ft48 ml25">有奖 <span class="color_FA846C">专区</span></div>
 	 		</div>
  			<div class="input_box  relative mb30">
- 				<input type="text" name="" class="w_100 h_100 text_center bg_ff input_box_intput" placeholder="请输入职位或者公司名">
+ 				<input type="text" name="" class="w_100 h_100 text_center bg_ff input_box_intput" placeholder="请输入职位或者公司名" v-model="searching">
  				<div class="el-icon-search seatching"></div>
  			</div>
  			<div  v-infinite-scroll="loadMore" infinite-scroll-distance="0" class="pb50">
@@ -21,8 +21,7 @@
 					<div class="ft24 index_money">{{item.salary_begin}}-{{item.salary_end}}元</div>
 				</div>
 				<div class="flex_warp w_100 mb25">
-					<div class="label_index">五险</div>
-					<div class="label_index">包吃</div>
+					<div class="label_index" v-for="(sitem,sindex) in item.welfare_tags" :key="sindex+'welfare_tags'">{{sitem}}</div>
 				</div>
 				<div class="flex_align">
 					<img class="logo_img mr15" v-lazy="item.company.logo">
@@ -49,6 +48,8 @@ export default {
 			fullHeight: document.documentElement.clientHeight,
 			list:[],
 			page:1,
+			searching:'',
+			pages:1
 		}
 	},
 	mounted(){
@@ -58,7 +59,7 @@ export default {
 		pageGet(){
 			let data = {}
 			data.page = this.page
-			 $http.get($utill.api.url + 'api/job/reward').then( res => {
+			$http.get($utill.api.url + 'api/job/reward').then( res => {
 			 	if (this.page == 1) {
 			 		this.list = res.data.data.data
 			 	} else {
@@ -71,18 +72,59 @@ export default {
 				console.log(res)
 			 })
 		},
-		loadMore() {
-			if (this.list.length==0) {
+		loadMore () {
+			if (!this.searching) {
+				if (this.list.length == 0) {
 				return false
 			}
-			this.page+=1
+			this.page += 1
 			if (this.page > this.last_page) {
 				return false
 			}
 			this.pageGet()
+			} else {
+				if (!this.searching) {
+					if (this.list.length == 0) {
+						return false
+					}
+				}
+				this.pages += 1
+				if (this.pages > this.last_page) {
+					return false
+				}
+			this.loading = true
+			this.searchOp()
+			}
+		},
+		searchOp(){
+			$http.get($utill.api.url + 'api/job/search?q='+ this.searching+'&page='+ this.pages+'&is_reward=1').then( res => {
+			 	if (this.pages == 1) {
+			 		this.list = res.data.data.data
+			 	} else {
+					for (let i in res.data.data.data) {
+						this.list.push(res.data.data.data[i])
+					}
+			 	}
+				this.last_page = res.data.data.last_page
+			 }).catch(res => {
+				console.log(res)
+			 })
+		}
+	},
+	watch:{
+		searching(val,old) {
+			console.log(val)
+			if (val!=old) {
+				this.pages = 1
+			}
+			if (val) {
+				this.searchOp()
+			} else {
+				this.page = 1
+				this.pageGet()
+			}
 		}
 	}
-
 }
 </script>
 
