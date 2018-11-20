@@ -54,7 +54,7 @@
 			</div>
 		</template>
 		<template v-if="index_type==1">
-			<router-link :to="'/jobdetail?id='+item.company_id" class="w_100 pl35 pr35 box_border h182 block" v-for="(item,index ) in detail.jobs" :key="index+'job'">
+			<div @click="toJobDetail(item.id)" class="w_100 pl35 pr35 box_border h182 block" v-for="(item,index ) in detail.jobs" :key="index+'job'">
 				<div class="w_100 h_100 flex">
 					<div class="w115 h_100 flex_align">
 						<img class="iitem_header" v-lazy="item.cover_img">
@@ -74,7 +74,7 @@
 						</div>
 					</div>
 				</div>
-			</router-link>
+			</div>
 		</template>
 	</div>
 </template>
@@ -92,6 +92,10 @@ export default {
 		}
 	},
 	mounted(){
+		// if (!Lockr.get('token')) {
+  //   let urls = location.href
+  //   window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=${urls}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+  // }
 		this.pageGet()
 	},
 	methods:{
@@ -110,6 +114,14 @@ export default {
 			 }).catch(res => {
 				console.log(res)
 			 })
+		},
+		toJobDetail(id){
+			let query = {}
+			query.id = id
+			query = JSON.stringify(query)
+			this.$router.push({
+				path:'/jobdetail?query='+query,
+			})
 		}
 	}
 

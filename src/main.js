@@ -32,6 +32,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.pageTitle
+  if (!Lockr.get('enterclick')) {
+    let url = location.href
+    window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=${url}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+    Lockr.set('enterclick', 2)
+  }
   next()
 })
 
@@ -54,7 +59,7 @@ router.afterEach((to, from) => {
     // wx.showMenuItems({
     //   menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:addContact'] // 要显示的菜单项，所有menu项见附录3
     // })
-    let link = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=http:://recruit.ztsdjy.com${to.path}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+    let link = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=http://recruit.ztsdjy.com${to.path}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
     wx.onMenuShareAppMessage({
       title: document.title, // 分享标题
       desc: document.title, // 分享描述

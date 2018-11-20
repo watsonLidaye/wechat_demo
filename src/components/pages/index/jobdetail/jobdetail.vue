@@ -121,7 +121,9 @@ export default {
 		}
 	},
 	mounted(){
-		if (this.$route.query.recommend) {
+		console.log(this.$route)
+		let query = JSON.parse(this.$route.query.query)
+		if (query.recommend) {
 				this.second_jump = true
 				this.user_id = this.$route.query.recommend
 			}
@@ -132,30 +134,21 @@ export default {
 			this.$router.push({name:path,params:{user:this.userInfo,detail:this.detail,user_id:this.user_id}})
 		},
 		pageGet(){
-			let data = {}
-			$http.get($utill.api.url + 'api/job/'+this.$route.query.id).then( res => {
+				let query = JSON.parse(this.$route.query.query)
+			$http.get($utill.api.url + 'api/job/'+query.id).then( res => {
 				if (res.data.data.length!=0) {
 					this.detail = res.data.data
 					this.show_detail = true
-					$utill.common.checktoken().then(this.getUser())
 				}
 			 }).catch(res => {
 				console.log(res)
 			 })
 		},
-		  getUser () {
-      let data = {}
-      data.page = this.page
-      $http.get($utill.api.url + 'api/users', {
-        headers: {
-          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
-        }
-      }, data).then(res => {
-        this.userInfo = res.data.data
-      }).catch(res => {
-        // console.log(res)
-      })
-    },
+	},
+	computed:{
+		userInfo(){
+			return Lockr.get('user_info')
+		}
 	}
 
 

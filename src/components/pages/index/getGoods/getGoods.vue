@@ -12,7 +12,7 @@
  				<div class="el-icon-search seatching"></div>
  			</div>
  			<div  v-infinite-scroll="loadMore" infinite-scroll-distance="0" class="pb50">
- 			<router-link :to="'/jobdetail?id='+item.company_id" class="block relative w680 pd30 box_border pb15 bg_ff  " v-for="(item,index) in list" :key="index+'list'">
+ 			<div @click="toJobDetail(item.id)" class="block relative w680 pd30 box_border pb15 bg_ff  " v-for="(item,index) in list" :key="index+'list'">
 				<div class="w_100 jub_jub_center mb25">
 					<div class="ft30 flex_align ">
 						<div>{{item.name}}</div>
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<img src="@/assets/image/index/置顶.png" class="top">
-			</router-link>
+			</div>
 			</div>
 
 	</div>
@@ -109,6 +109,14 @@ export default {
 			 }).catch(res => {
 				console.log(res)
 			 })
+		},
+		toJobDetail(id){
+			let query = {}
+			query.id = id
+			query = JSON.stringify(query)
+			this.$router.push({
+				path:'/jobdetail?query='+query,
+			})
 		}
 	},
 	watch:{

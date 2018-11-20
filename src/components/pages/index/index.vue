@@ -55,8 +55,7 @@
 			<div class="pb_tabbas">
 				<template v-for="(item,index) in list"
 				          v-if="item">
-					<router-link :to="'/jobdetail?id='+item.company_id"
-					             class="block relative w_100 pd30 box_border pb15"
+					<div @click="toJobDetail(item.id)"       class="block relative w_100 pd30 box_border pb15"
 					             :key="index+'list'">
 						<div class="w_100 jub_jub_center mb25">
 							<div class="ft30 flex_align ">
@@ -81,7 +80,7 @@
 						</div>
 						<img src="@/assets/image/index/置顶.png"
 						     class="top">
-					</router-link>
+					</div>
 					<div class="navbto"
 					     :key="index+'bot'"></div>
 				</template>
@@ -178,6 +177,14 @@ export default {
 			 }).catch(res => {
 				console.log(res)
 			 })
+		},
+		toJobDetail(id){
+			let query = {}
+			query.id = id
+			query = JSON.stringify(query)
+			this.$router.push({
+				path:'/jobdetail?query='+query,
+			})
 		}
 	},
 	watch:{

@@ -69,6 +69,9 @@ export default {
   methods:{
     login(){
       if ( Lockr.get('token')) {
+          $utill.common.checktoken().then(() => {
+            this.getUser()
+          })
         return false
       } else {
         let data = {}
@@ -81,6 +84,7 @@ export default {
             time.expires_in = res.data.data.expires_in
             time.tokenrecode = Date.parse(new Date())
             Lockr.set('time',time)
+            this.getUser()
           } else {
             console.log(res)
             }
@@ -89,6 +93,18 @@ export default {
           })
       }
     },
+      getUser () {
+          let data = {}
+          $http.get($utill.api.url + 'api/users', {
+            headers: {
+              'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
+            }
+          }).then(res => {
+             Lockr.set('user_info',res.data.data)
+          }).catch(res => {
+            // console.log(res)
+          })
+        },
 
   }
 }

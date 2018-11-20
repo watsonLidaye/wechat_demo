@@ -68,16 +68,18 @@ export default {
 		if (this.$route.params.detail) {
 			this.detail = this.$route.params.detail
 			this.user = this.$route.params.user
-			console.log(this.user)
 			this.qrcode()
 		}
 	},
 	methods:{
 		qrcode(){
 			let id =this.detail.id
-			let tokens = this.user.id
+			let recommend = this.user.id
 			let data = {}
-			data.q = `http://recruit.ztsdjy.com/jobdetail?recommend=${tokens}&id=${id}`
+			data.id = id
+			data.recommend = recommend
+			let query = JSON.stringify(data)
+			data.q =`http://recruit.ztsdjy.com/jobdetail?query=${query}`
 			$http.post(`${$utill.api.url}api/qrcode`,data).then( res => {
 			 		this.img = 'data:image/png;base64,'+res.data.data.qrcode
 			 		this.show = true

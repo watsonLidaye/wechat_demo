@@ -118,31 +118,35 @@ function alertOp(info) {
 function checktoken() {
 	return new Promise((resolve, reject) => {
 		let curentTime = Date.parse(new Date())
-		if (curentTime - Lockr.get('time').tokenrecode <= Lockr.get('time').expires_in * 1000) {
-			resolve()
-			return false
-		}
-		let data = {}
-		data.access_token = Lockr.get('token')
-		$http.post($utill.api.url + $utill.api.api.refreshtoken, data, {
-			headers: {
-				'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
-			}
-		}).then((res) => {
-			if (res.data.code == 1) {
-				Lockr.set('token', res.data.data.access_token)
-				Lockr.set('token_type', res.data.data.token_type)
-				let time = {}
-				time.expires_in = res.data.data.expires_in
-				time.tokenrecode = Date.parse(new Date())
-				Lockr.set('time', time)
+		if (Lockr.get('time') && Lockr.get('time').tokenrecode) {
+			if (curentTime - Lockr.get('time').tokenrecode <= Lockr.get('time').expires_in * 1000) {
 				resolve()
-			} else {
-				reject(res)
+				return false
 			}
-		}).catch((res) => {
-			reject(res)
-		})
+			let data = {}
+			data.access_token = Lockr.get('token')
+			$http.post($utill.api.url + $utill.api.api.refreshtoken, data, {
+				headers: {
+					'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
+				}
+			}).then((res) => {
+				if (res.data.code == 1) {
+					Lockr.set('token', res.data.data.access_token)
+					Lockr.set('token_type', res.data.data.token_type)
+					let time = {}
+					time.expires_in = res.data.data.expires_in
+					time.tokenrecode = Date.parse(new Date())
+					Lockr.set('time', time)
+					resolve()
+				} else {
+					reject(res)
+				}
+			}).catch((res) => {
+				reject(res)
+			})
+		}
+
+
 	})
 }
 
