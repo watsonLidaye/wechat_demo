@@ -88,20 +88,20 @@
 						<div class="ft30">有奖推荐</div>
 					</div>
 				</div>
-				<div class="rightbtn juc_colum_b" @click="jump('inputfile')">
+				<router-link class="rightbtn juc_colum_b" :to="'/inputfile?job_id='+job_id">
 					<div class="flex_align ">
 						<img src="@/assets/image/index/sign up_btn.png" class="w32h32 mr10">
 						<div class="ft30 color_ff">在线报名</div>
 					</div>
-				</div>
+				</router-link>
 			</div>
 			<div class="bto_bar juc_colum_b box_border pl35"  v-if="second_jump">
-				<div class="rightbtn juc_colum_b" @click="jump('inputfile',user_id)">
+				<router-link class="rightbtn juc_colum_b" :to="'/inputfile?job_id='+job_id">
 					<div class="flex_align ">
 						<img src="@/assets/image/index/sign up_btn.png" class="w32h32 mr10">
 						<div class="ft30 color_ff">在线报名</div>
 					</div>
-				</div>
+				</router-link>
 			</div>
 		</template>
 	</div>
@@ -117,15 +117,20 @@ export default {
 			detail:{},
 			show_detail:false,
 			second_jump:false,
-			user_id:''
+			job_id:''
 		}
 	},
 	mounted(){
-		console.log(this.$route)
-		let query = JSON.parse(this.$route.query.query)
-		if (query.recommend) {
+		let recommend = this.$route.fullPath.split('reid')[0].split('=')[1]
+		if (this.$route.fullPath.split('reid')[1].indexOf('&')!=-1) {
+			this.job_id = this.$route.fullPath.split('reid')[1].split('&')[0]
+		} else {
+			this.job_id = this.$route.fullPath.split('reid')[1]
+		}
+		if (recommend!=0) {
 				this.second_jump = true
-				this.user_id = this.$route.query.recommend
+				this.user_id = recommend
+				Lockr.set('recommend',recommend)
 			}
 		this.pageGet()
 	},
@@ -134,8 +139,7 @@ export default {
 			this.$router.push({name:path,params:{user:this.userInfo,detail:this.detail,user_id:this.user_id}})
 		},
 		pageGet(){
-				let query = JSON.parse(this.$route.query.query)
-			$http.get($utill.api.url + 'api/job/'+query.id).then( res => {
+			$http.get($utill.api.url + 'api/job/'+this.job_id).then( res => {
 				if (res.data.data.length!=0) {
 					this.detail = res.data.data
 					this.show_detail = true

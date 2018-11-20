@@ -73,13 +73,10 @@ export default {
 	},
 	methods:{
 		qrcode(){
+			let data = {}
 			let id =this.detail.id
 			let recommend = this.user.id
-			let data = {}
-			data.id = id
-			data.recommend = recommend
-			let query = JSON.stringify(data)
-			data.q =`http://recruit.ztsdjy.com/jobdetail?query=${query}`
+			data.q ='http://recruit.ztsdjy.com/jobdetail?query='+recommend+'reid'+id
 			$http.post(`${$utill.api.url}api/qrcode`,data).then( res => {
 			 		this.img = 'data:image/png;base64,'+res.data.data.qrcode
 			 		this.show = true

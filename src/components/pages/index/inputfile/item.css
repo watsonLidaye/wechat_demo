@@ -82,3 +82,20 @@ font-size: .3rem;
 .dwon{
 	transform: translate3d(0,500px,0);
 }
+.recommend{
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 20;
+	line-height: .78rem;
+	padding-left: .4rem;
+	color: #999;
+}
+.plinput{
+	padding-left: 1.5rem;
+}
+.borderl{
+	border:1px solid #84B6FA;
+	color:#84B6FA;
+}

@@ -179,11 +179,8 @@ export default {
 			 })
 		},
 		toJobDetail(id){
-			let query = {}
-			query.id = id
-			query = JSON.stringify(query)
 			this.$router.push({
-				path:'/jobdetail?query='+query,
+				path:'/jobdetail?query='+'0'+'reid'+id,
 			})
 		}
 	},
