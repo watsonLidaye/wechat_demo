@@ -171,18 +171,18 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  z-index: 99;
+  z-index: 20;
 }
 .withdraw_box {
   width: 5.64rem;
   height: 4.16rem;
   background: rgba(255, 255, 255, 1);
   border-radius: 0.08rem;
-  position: fixed;
-  top: 3.95rem;
-  left: 0.93rem;
-  right: 0.93rem;
-  z-index: 128;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
 }
 .withdraw_title {
   border-bottom: 1px solid rgba(226, 226, 226, 1);
@@ -240,11 +240,11 @@
   border-radius: 0.08rem;
   padding-bottom: 0.52rem;
   box-sizing: border-box;
-  position: fixed;
-  top: 1rem;
-  left: 0.93rem;
-  right: 0.93rem;
-  z-index: 128;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
 }
 .confirm_title {
   font-size: 0.32rem;

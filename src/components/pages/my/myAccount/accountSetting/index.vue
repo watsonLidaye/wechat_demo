@@ -2,26 +2,25 @@
   <div>
     <div class="setting_panel relative"
          :style="{'min-height':fullHeight+'px'}">
-      <div class="setting_mian pl35 pr35 box_border">
+      <div class="setting_mian pl35 pt35 pr35 box_border">
         <div class="input_wrapper">
           <label for="name"
-                 class="color_999 ft24 block">姓名</label>
+                 class="input_label">姓名</label>
           <input id="name"
                  v-model="accountInfo.name"
                  placeholder="请输入姓名"
                  class="input_place">
         </div>
-        <div class="input_wrapper">
+        <div class="input_wrapper"
+             @click="popupVisible = true">
           <label for="openbank"
-                 class="color_999 ft24 block">开户银行</label>
-          <input id="openbank"
-                 v-model="accountInfo.bank_code"
-                 placeholder="请输入详细银行名称"
-                 class="input_place">
+                 class="input_label">开户银行</label>
+          <div id="openbank"
+               class="input_place">{{bank_name}}</div>
         </div>
         <div class="input_wrapper">
           <label for="banknumber"
-                 class="color_999 ft24 block">银行卡号</label>
+                 class="input_label">银行卡号</label>
           <input id="banknumber"
                  v-model="accountInfo.bank_card"
                  placeholder="请输入银行卡号"
@@ -30,7 +29,7 @@
         <div class="split_line"></div>
         <div class="input_wrapper">
           <label for="phone"
-                 class="color_999 ft24 block">手机号码</label>
+                 class="input_label">手机号码</label>
           <input id="phone"
                  type="number"
                  v-model="accountInfo.phone"
@@ -39,7 +38,7 @@
         </div>
         <div class="input_wrapper">
           <label for="valicode"
-                 class="color_999 ft24 block">请输入验证码</label>
+                 class="input_label">请输入验证码</label>
           <div class="auth_wrapper">
             <input id="valicode"
                    v-model="accountInfo.verification_code"
@@ -53,6 +52,13 @@
       <div class="setting_btn"
            @click="accountSet">保存</div>
     </div>
+    <mt-popup v-model="popupVisible"
+              position="bottom"
+              class="w_100">
+      <mt-picker :slots="slots"
+                 valueKey="label"
+                 @change="onValuesChange"></mt-picker>
+    </mt-popup>
   </div>
 </template>
 <script type='text/ecmascript-6'>
@@ -61,6 +67,58 @@ export default {
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
+      popupVisible: false,
+      slots: [
+        {
+          flex: 1,
+          values: [
+            {
+              label: '请选择',
+              value: ''
+            },
+            {
+              label: '中国工商银行',
+              value: '0102'
+            },
+            {
+              label: '中国建设银行',
+              value: '0105'
+            },
+            {
+              label: '中国银行',
+              value: '0104'
+            },
+            {
+              label: '中国农业银行',
+              value: '0103'
+            },
+            {
+              label: '中国民生银行',
+              value: '0305'
+            },
+            {
+              label: '华夏银行',
+              value: '0304'
+            },
+            {
+              label: '招商银行',
+              value: '0308'
+            },
+            {
+              label: '深圳发展银行',
+              value: '0316'
+            },
+            {
+              label: '上海浦东发展银行',
+              value: '0310'
+            },
+            {
+              label: '兴业银行',
+              value: '0309'
+            }
+          ]
+        }
+      ],
       timer_second: '获取验证码',
       accountInfo: {
         name: '',
@@ -68,7 +126,8 @@ export default {
         bank_card: '',
         verification_key: '',
         verification_code: ''
-      }
+      },
+      bank_name: ''
     }
   },
   created () { },
@@ -103,6 +162,11 @@ export default {
           }
         }, 1000)
       }
+    },
+    onValuesChange (picker, values) {
+      this.accountInfo.bank_code = picker.getValues()[0].value
+      this.bank_name = picker.getValues()[0].label
+      this.popupVisible = false
     },
     // 账户设置
     accountSet () {

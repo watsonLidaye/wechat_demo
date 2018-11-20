@@ -3,11 +3,11 @@
     <div class="borrow_panel margin_center"
          :style="{'min-height':fullHeight+'px'}">
       <div class="borrow_hd mb25 pl35 pr35 box_border bg_fff">
-        <div><span class="ft40 color_333">刘才栋</span><img src="./image/ico_nan@2x.png"
+        <div><span class="ft40 color_333">{{user_info.name}}</span><img src="./image/ico_nan@2x.png"
                class="icon_sex ml15"></div>
         <div><img class="icon_card inline_block"
                src="./image/idcard@2x.png"
-               alt=""><span class="ml20 ft32 color_999">430223 ******** 9867</span></div>
+               alt=""><span class="ml20 ft32 color_999">{{user_info.idcard}}</span></div>
       </div>
       <div class="borrow_main">
         <div class="borrow_inputer relative mb25 bg_fff">
@@ -28,11 +28,11 @@
           </div>
           <div class="flex flex_h_between flex_1 pt40 pb40 ft32 border_e2e2e2 box_border">
             <span class="color_333">开户银行</span>
-            <span class="color_999">招商银行深圳支行爱华分行</span>
+            <span class="color_999">{{user_info.bank_code}}</span>
           </div>
           <div class="flex flex_h_between flex_1 pt40 pb40 ft32 box_border">
             <span class="color_333">银行卡号</span>
-            <span class="color_999">6225 **** **** 5186</span>
+            <span class="color_999">{{user_info.bank_card}}</span>
           </div>
         </div>
       </div>
@@ -49,30 +49,13 @@ export default {
     return {
       fullHeight: document.documentElement.clientHeight,
       amount: 10,
-      borrow_remark: '日常消费'
+      borrow_remark: '日常消费',
+      user_info: Lockr.get('user_info')
     }
   },
   created () { },
-  mounted () {
-    this.getUserInfo()
-  },
+  mounted () { },
   methods: {
-    getUserInfo () {
-      let _this = this
-      let options = {
-        method: 'get',
-        url: $utill.api.url + 'api/users/account',
-        headers: {
-          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
-        }
-      }
-      $http.request(options).then(res => {
-        console.log(res)
-        this.withdraw_visible = false
-      }).catch(res => {
-        console.log(res)
-      })
-    },
     borrowMoney () {
       let _this = this
       let options = {

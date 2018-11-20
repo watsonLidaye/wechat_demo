@@ -36,16 +36,15 @@
   display: block;
   margin: 0 auto;
 }
-
+.picker_100 {
+  width: 100%;
+}
 /* unique */
 .detail_panel {
   width: 100%;
   max-width: 7.5rem;
   position: relative;
   background: #f7f7f7;
-}
-.input_wrapper {
-  padding-top: 0.24rem;
 }
 .input_place {
   font-size: 0.32rem;
@@ -122,4 +121,11 @@
     rgba(249, 180, 162, 1)
   );
   border-radius: 0.1rem;
+}
+.input_label {
+  height: 0.4rem;
+  line-height: 0.4rem;
+  color: #999;
+  display: block;
+  font-size: 0.24rem;
 }
