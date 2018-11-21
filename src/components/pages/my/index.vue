@@ -8,25 +8,28 @@
         <!-- user -->
         <div class="user_info">
           <div>
-            <h3 class="user_name mb25">{{userInfo.name}}<img v-if="userInfo.sex === 1"
+            <div class="user_name mb25">{{user_info.name}}
+              <img v-if="user_info.sex === 1"
                    class="icon_30 ml15"
-                   src="./image/ico_nan.png"><img v-else
+                   src="./image/ico_nan.png">
+              <img v-else
                    class="icon_30 ml15"
-                   src="./image/ico_nv.png"></h3>
+                   src="./image/ico_nv.png">
+            </div>
             <router-link to="/myInfo">
               <p class="mine_info">我的信息<img class="icon_30 ml10"
                      src="./image/_icobj.png"></p>
             </router-link>
           </div>
           <img class="user_avatar"
-               v-lazy="userInfo.avatar">
+               v-lazy="user_info.avatar">
         </div>
       </div>
       <!-- mian -->
       <div class="user_main">
         <!-- operation -->
         <div class="user_operation">
-          <router-link :to="{ name: 'myWork', params: { id: userInfo.id }}">
+          <router-link to="/myWork">
             <div class="operation_item">
               <img class="icon_60 mr25"
                    src="./image/ico_work.png">
@@ -85,29 +88,13 @@ export default {
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
-      userInfo: {}
+      user_info: Lockr.get('user_info')
     }
   },
   created () { },
   mounted () {
-    $utill.common.checktoken().then(this.pageGet())
   },
   methods: {
-    pageGet () {
-      let _this = this
-      let options = {
-        method: 'get',
-        url: $utill.api.url + 'api/users',
-        headers: {
-          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
-        }
-      }
-      $http.request(options).then(res => {
-        this.userInfo = res.data.data
-      }).catch(res => {
-        console.log(res)
-      })
-    }
   },
   computed: {},
   destroyed () { }

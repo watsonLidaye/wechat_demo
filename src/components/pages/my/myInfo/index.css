@@ -107,3 +107,10 @@
   );
   border-radius: 0.1rem;
 }
+.auth_code_btn.interval {
+  background: linear-gradient(
+    -32deg,
+    rgba(178, 178, 178, 1),
+    rgba(204, 204, 204, 1)
+  );
+}

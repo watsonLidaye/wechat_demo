@@ -13,7 +13,8 @@
           <div class="account_item bg_grey mb30">
             <div class="flex flex_h_between flex_v_center">
               <span class="account_title color_grey">账户余额</span>
-              <div class="color_fff ft24">明细<img src="./image/arrow_white@2x.png"
+              <div @click="checkDetail('transaction')"
+                   class="color_fff ft24">明细<img src="./image/arrow_white@2x.png"
                      class="icon_arrow"></div>
             </div>
             <div class="account_balance_wrap">
@@ -27,7 +28,8 @@
           <div class="account_item bg_golden">
             <div class="flex flex_h_between flex_v_center">
               <span class="account_title color_golden">可用金额</span>
-              <div class="color_brown ft24">明细<img src="./image/arrow_gold@2x.png"
+              <div @click="checkDetail('credit')"
+                   class="color_brown ft24">明细<img src="./image/arrow_gold@2x.png"
                      class="icon_arrow"></div>
             </div>
             <div class="account_balance_wrap">
@@ -167,18 +169,18 @@ export default {
     },
     // 获取短信验证码和凭证
     getAuthCode () {
-      let _this = this,
-        options = {
-          method: 'post',
-          url: $utill.api.url + 'api/verificationCodes',
-          headers: {
-            'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
-          },
-          data: {
-            phone: _this.user_info.phone
-          }
+      let _this = this
+      let options = {
+        method: 'post',
+        url: $utill.api.url + 'api/verificationCodes',
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
         },
-        timer = null
+        data: {
+          phone: _this.user_info.phone
+        }
+      }
+      let timer = null
       if (this.timer_second === '获取验证码') {
         this.timer_second = 60
         $http.request(options).then(res => {
@@ -224,6 +226,14 @@ export default {
           position: 'bottom',
           duration: 5000
         })
+      })
+    },
+    checkDetail (type) {
+      this.$router.push({
+        name: 'accountDetail',
+        params: {
+          type: type
+        }
       })
     }
   }
