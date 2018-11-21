@@ -11,8 +11,7 @@
              @click="checkStatus(intro_item,intro_index)">
           <div class="color_f8f8f8">
             <div class="mb35">
-              <img src="http://upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180"
-                   alt=""
+              <img v-lazy="intro_item.avatar"
                    class="intro_avatar">
               <div class="inline_block">
                 <h3 class="ft32 font_weight">{{intro_item.name}}</h3>
@@ -32,8 +31,7 @@
              @click="checkStatus(intro_item,intro_index)">
           <div class="color_f8f8f8">
             <div class="mb35">
-              <img src="http://upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180"
-                   alt=""
+              <img v-lazy="intro_item.avatar"
                    class="intro_avatar">
               <div class="inline_block">
                 <h3 class="ft32 font_weight">{{intro_item.name}}</h3>
@@ -53,8 +51,7 @@
              @click="checkStatus(intro_item,intro_index)">
           <div class="color_f8f8f8">
             <div class="mb35">
-              <img src="http://upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180"
-                   alt=""
+              <img v-lazy="intro_item.avatar"
                    class="intro_avatar">
               <div class="inline_block">
                 <h3 class="ft32 font_weight">{{intro_item.name}}</h3>

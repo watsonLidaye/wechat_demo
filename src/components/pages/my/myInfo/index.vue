@@ -5,7 +5,7 @@
         <div class="hd_avatar">
           <img :src="user_info.avatar"
                class="avatar">
-          <img src="./image/ico_bj_blue@2x.png"
+          <img src="./ico_bj_blue.png"
                class="icon_edit">
         </div>
         <div class="name">{{user_info.name}}</div>

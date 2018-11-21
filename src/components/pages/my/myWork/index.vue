@@ -9,7 +9,7 @@
                :key="list_index"
                class="work_item mb25">
             <div class="work_avatar">
-              <img :src="list_item.logo?list_item.logo: ''"
+              <img v-lazy="list_item.logo"
                    class="w116h116">
             </div>
             <div class="item_r ml30">
@@ -20,10 +20,10 @@
                 <p class="info_describe">{{list_item.company}}</p>
               </div>
               <img v-if="list_item.status === 1"
-                   src="./image/register@2x.png"
+                   src="./join.png"
                    class="work_status">
               <img v-else
-                   src="./image/join@2x.png"
+                   src="./work.png"
                    class="work_status">
             </div>
           </div>

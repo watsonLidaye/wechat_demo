@@ -43,13 +43,13 @@
           </div>
         </div>
       </div>
-      <router-link to="/borrowSubmit">
-        <div class="next_btn">下一步</div>
-      </router-link>
+      <div class="next_btn"
+           @click="borrowMoney">下一步</div>
     </div>
   </div>
 </template>
 <script>
+import { Toast } from 'mint-ui'
 import bankList from '@/assets/js/mock/bank.json'
 export default {
   name: 'myBorrow',
@@ -77,8 +77,8 @@ export default {
     borrowMoney () {
       let _this = this
       let options = {
-        method: 'post',
-        url: $utill.api.url + 'api/user/borrow',
+        method: 'POST',
+        url: $utill.api.url + 'api/users/borrow',
         headers: {
           'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
         },
@@ -88,10 +88,13 @@ export default {
         }
       }
       $http.request(options).then(res => {
-        console.log(res)
-        this.withdraw_visible = false
+        this.$router.push({ name: 'borrowSubmit' })
       }).catch(res => {
-        console.log(res)
+        Toast({
+          message: res.response.data.msg,
+          position: 'bottom',
+          duration: 5000
+        })
       })
     }
   },

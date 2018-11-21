@@ -1,7 +1,7 @@
 .intro_panel {
   width: 7.5rem;
   height: 13.34rem;
-  background: rgba(255, 255, 255, 1);
+  background: #fff;
   margin: 0 auto;
 }
 .intro_list {
@@ -16,9 +16,18 @@
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 2px 8px 0 rgba(7, 17, 27, 0.1);
+}
+.bg_grey {
+  background: url('./image/frame_grey.png');
+  width: 6.9rem;
+  height: 1.9rem;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .bg_red {
-  background: url('./image/frame_red@2x.png');
+  background: url('./image/frame_red.png');
   width: 6.9rem;
   height: 1.9rem;
   background-size: 100%;
@@ -26,15 +35,7 @@
   background-repeat: no-repeat;
 }
 .bg_blue {
-  background: url('./image/frame_blue@2x.png');
-  width: 6.9rem;
-  height: 1.9rem;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.bg_grey {
-  background: url('./image/frame_grey.png');
+  background: url('./image/frame_blue.png');
   width: 6.9rem;
   height: 1.9rem;
   background-size: 100%;

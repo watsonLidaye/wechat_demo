@@ -119,13 +119,13 @@
   color: #333;
 }
 .bg_grey {
-  background: url('./image/frame_black@2x.png');
+  background: url('./image/frame_black.png');
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
 }
 .bg_golden {
-  background: url('./image/frame_gold@2x.png');
+  background: url('./image/frame_gold.png');
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;

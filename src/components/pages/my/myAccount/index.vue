@@ -3,8 +3,8 @@
     <div class="account_panel"
          :style="{'min-height':fullHeight+'px'}">
       <div class="account_wrap">
-        <div class="account_hd"><img :src="user_info.avatar"
-               alt=""
+        <div class="account_hd">
+          <img v-lazy="user_info.avatar"
                class="avatar">
           <div class="user_name">{{user_info.name}}</div>
         </div>
@@ -14,7 +14,7 @@
             <div class="flex flex_h_between flex_v_center">
               <span class="account_title color_grey">账户余额</span>
               <div @click="checkDetail('transaction')"
-                   class="color_fff ft24">明细<img src="./image/arrow_white@2x.png"
+                   class="color_fff ft24">明细<img src="./image/arrow_white.png"
                      class="icon_arrow"></div>
             </div>
             <div class="account_balance_wrap">
@@ -29,7 +29,7 @@
             <div class="flex flex_h_between flex_v_center">
               <span class="account_title color_golden">可用金额</span>
               <div @click="checkDetail('credit')"
-                   class="color_brown ft24">明细<img src="./image/arrow_gold@2x.png"
+                   class="color_brown ft24">明细<img src="./image/arrow_gold.png"
                      class="icon_arrow"></div>
             </div>
             <div class="account_balance_wrap">
@@ -44,14 +44,14 @@
             <div class="account_op_item"
                  @click="popupVisible =true">
               <div class="ft32 color_333">提现</div>
-              <img src="./image/arrow_2@2x.png"
+              <img src="./image/arrow_2.png"
                    alt=""
                    class="icon_arrow">
             </div>
             <router-link to="/accountSetting">
               <div class="account_op_item">
                 <div class="ft32 color_333">账户资料设置</div>
-                <img src="./image/arrow_2@2x.png"
+                <img src="./image/arrow_2.png"
                      alt=""
                      class="icon_arrow">
               </div>
@@ -234,7 +234,7 @@ export default {
         _this.$router.push({ name: 'borrowSubmit' })
       }).catch(res => {
         Toast({
-          message: fail.response.data.msg,
+          message: res.response.data.msg,
           position: 'bottom',
           duration: 5000
         })

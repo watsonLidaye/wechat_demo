@@ -11,11 +11,11 @@
              v-for="(list_item,list_index) in list"
              :key="list_index">
           <img v-if="list_item.state===2"
-               src="./image/ico_zhi@2x.png"
+               src="./ico_zhi.png"
                class="icon_82 ml35 mr35"
                alt="">
           <img v-else
-               src="./image/ico_shou@2x.png"
+               src="./ico_shou.png"
                class="icon_82 ml35 mr35"
                alt="">
           <div class="border_e2e2e2 flex_1 pt25 pb25 box_border">

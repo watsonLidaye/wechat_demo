@@ -3,7 +3,7 @@
     <div class="borrow_panel margin_center"
          :style="{'min-height':fullHeight+'px'}">
       <div class="bg_fff w_100 borrow_main">
-        <img src="./inset@2x.png"
+        <img src="./insert.png"
              alt=""
              class="w301h365 margin_center">
         <p class="ft32 color_333 text_center mb25">您的借款申请已提交</p>

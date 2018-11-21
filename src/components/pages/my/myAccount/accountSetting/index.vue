@@ -73,10 +73,6 @@ export default {
           flex: 1,
           values: [
             {
-              label: '请选择',
-              value: ''
-            },
-            {
               label: '中国工商银行',
               value: '0102'
             },
@@ -185,7 +181,7 @@ export default {
         }
       }
       $http.request(options).then(res => {
-        this.$router.push({ name: 'myAccount' })
+        this.$router.push({ name: 'borrowSubmit' })
       }).catch(res => {
         console.log(res)
       })
