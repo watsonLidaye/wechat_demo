@@ -69,7 +69,7 @@
               </div>
             </div>
           </router-link>
-          <a href="tel:110"
+          <a :href="tel"
              class="operation_item">
             <img class="icon_60 mr25"
                  src="./image/ico_kefu.png">
@@ -84,18 +84,42 @@
   </div>
 </template>
 <script>
+import { Toast } from 'mint-ui'
 export default {
   name: 'my',
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
-      user_info: Lockr.get('user_info')
+      user_info: Lockr.get('user_info'),
+      tel: ''
     }
   },
   created () { },
   mounted () {
+    this.getBankList()
   },
   methods: {
+    getBankList () {
+      let _this = this
+      let options = {
+        method: 'get',
+        url: $utill.api.url + 'api/common',
+        headers: {
+          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
+        }
+      }
+      $http.request(options).then(res => {
+        this.tel = 'tel:+' + res.data.data.customerPhone
+        Lockr.set('bank_info', res.data.data)
+        console.log(res.data.data.bank)
+      }).catch(res => {
+        Toast({
+          message: res.response.data.msg,
+          position: 'bottom',
+          duration: 5000
+        })
+      })
+    }
   },
   computed: {},
   destroyed () { }
