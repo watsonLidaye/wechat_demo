@@ -69,14 +69,15 @@
               </div>
             </div>
           </router-link>
-          <div class="operation_item">
+          <a href="tel:110"
+             class="operation_item">
             <img class="icon_60 mr25"
                  src="./image/ico_kefu.png">
             <div class="w_100 operation_item_r">
               联系客服<img class="icon_30"
                    src="./image/arrow_1.png">
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

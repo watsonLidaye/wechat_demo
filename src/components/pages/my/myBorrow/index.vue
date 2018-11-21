@@ -3,8 +3,14 @@
     <div class="borrow_panel margin_center"
          :style="{'min-height':fullHeight+'px'}">
       <div class="borrow_hd mb25 pl35 pr35 box_border bg_fff">
-        <div><span class="ft40 color_333">{{user_info.name}}</span><img src="./image/ico_nan@2x.png"
-               class="icon_sex ml15"></div>
+        <div><span class="ft40 color_333">{{user_info.name}}</span>
+          <img v-if="user_info.sex === 1"
+               class="icon_sex ml15"
+               src="./image/ico_nan@2x.png">
+          <img v-else
+               class="icon_sex ml15"
+               src="./image/ico_nv@2x.png">
+        </div>
         <div><img class="icon_card inline_block"
                src="./image/idcard@2x.png"
                alt=""><span class="ml20 ft32 color_999">{{user_info.idcard}}</span></div>
@@ -24,11 +30,12 @@
         <div class="borrow_info pl35 pr35 box_border bg_fff">
           <div class="flex flex_h_between flex_1 pt40 pb40 ft32 border_e2e2e2 box_border">
             <span class="color_333">借款用途</span>
-            <span class="color_333">{{borrow_remark}}</span>
+            <input v-model="borrow_remark"
+                   placeholder="请输入借款用途">
           </div>
           <div class="flex flex_h_between flex_1 pt40 pb40 ft32 border_e2e2e2 box_border">
             <span class="color_333">开户银行</span>
-            <span class="color_999">{{user_info.bank_code}}</span>
+            <span class="color_999">{{bank_name}}</span>
           </div>
           <div class="flex flex_h_between flex_1 pt40 pb40 ft32 box_border">
             <span class="color_333">银行卡号</span>
@@ -43,23 +50,34 @@
   </div>
 </template>
 <script>
+import bankList from '@/assets/js/mock/bank.json'
 export default {
   name: 'myBorrow',
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
-      amount: 10,
-      borrow_remark: '日常消费',
+      amount: 0,
+      borrow_remark: '',
+      bank_name: '',
       user_info: Lockr.get('user_info')
     }
   },
   created () { },
-  mounted () { },
+  mounted () {
+    this.showingBankName()
+  },
   methods: {
+    showingBankName () {
+      for (let i in bankList) {
+        if (bankList[i].value === this.user_info.bank_code) {
+          this.bank_name = bankList[i].label
+        }
+      }
+    },
     borrowMoney () {
       let _this = this
       let options = {
-        method: 'get',
+        method: 'post',
         url: $utill.api.url + 'api/user/borrow',
         headers: {
           'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),

@@ -158,7 +158,15 @@ export default {
         }
       }
       $http.request(options).then(res => {
-        console.log(res)
+        Lockr.set('user_info', res.data.data)
+        Toast({
+          message: res.data.msg,
+          position: 'bottom',
+          duration: 2000
+        })
+        setTimeout(() => {
+          that.$router.push({ name: 'my' })
+        }, 3000)
       }).catch(res => {
         Toast({
           message: res.response.data.message ? res.response.data.message : res.response.data.msg,

@@ -83,7 +83,8 @@
               <span class="step_main">已报名</span>
               <span class="step_date">{{list.created_at}}</span>
             </div>
-            <div class="step_item clearfix">
+            <div v-if="list.worked_at"
+                 class="step_item clearfix">
               <div class="step_head">
                 <img src="./image/ico_success@2x.png"
                      class="step_icon">

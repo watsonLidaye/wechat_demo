@@ -90,7 +90,7 @@
         </div>
         <div class="input_wrapper">
           <p class="ft24 color_999 mb15">开户银行：</p>
-          <p class="ft32 color_333">{{user_info.bank_code}}</p>
+          <p class="ft32 color_333">{{open_bank}}</p>
         </div>
         <div class="input_wrapper">
           <p class="ft24 color_999 mb15">银行账号：</p>
@@ -125,6 +125,7 @@
 </template>
 <script>
 import { Toast } from 'mint-ui'
+import bankList from '@/assets/js/mock/bank.json'
 export default {
   name: 'myAccount',
   data () {
@@ -137,14 +138,25 @@ export default {
       timer_second: '获取验证码',
       withdraw_step: 1, //提现阶段
       verification_key: '', //短信凭证
-      verification_code: '' //短信码
+      verification_code: '', //短信码
+      open_bank: '' //开户行
     }
   },
   created () { },
   mounted () {
     this.getAccount()
+    this.showingOpenBank()
   },
   methods: {
+    showingOpenBank () {
+      for (let i in bankList) {
+        // console.log(bankList[i].value)
+        if (bankList[i].value == Number(this.user_info.bank_code)) {
+          this.open_bank = bankList[i].label
+        }
+      }
+      // console.log(this.open_bank)
+    },
     // 用户账户信息，金额等
     getAccount () {
       let _this = this
