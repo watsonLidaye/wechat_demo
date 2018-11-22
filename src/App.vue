@@ -93,7 +93,7 @@ export default {
           })
       }
     },
-      getUser () {
+    getUser () {
           let data = {}
           $http.get($utill.api.url + 'api/users', {
             headers: { 

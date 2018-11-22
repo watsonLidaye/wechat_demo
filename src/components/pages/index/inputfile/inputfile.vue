@@ -30,7 +30,7 @@
 		<div class="pb48 w680">
 			<input type="number" class="header_input_name ft30 box_border pl40" placeholder="身份证" maxlength="20" v-model="idcard">
 		</div>
-		<div class="pb100 w680 relative" v-if="!recommend">
+		<div class="pb100 w680 relative">
 			<div class="recommend ft30">推荐人：</div>
 			<input type="text" class="header_input_name ft30 box_border plinput" v-model="utm_medium" maxlength="10">
 		</div>

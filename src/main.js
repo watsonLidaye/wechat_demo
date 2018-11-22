@@ -32,14 +32,15 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.pageTitle
-  if (!Lockr.get('enterclick')) {
+  if (location.href.indexOf('state=STATE') != -1) {
+    Lockr.set('enterclick', 2)
+  }
+  if (Lockr.get('enterclick') != 2) {
     let url = location.href
     window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=${url}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
-    Lockr.set('enterclick', 2)
   }
   next()
 })
-
 router.afterEach((to, from) => {
   switch (to.path) {
     case '/':

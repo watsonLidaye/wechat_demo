@@ -90,15 +90,25 @@ export default {
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
-      user_info: Lockr.get('user_info'),
+      user_info: {},
       tel: ''
     }
   },
   created () { },
   mounted () {
     this.getBankList()
+    this.getUser()
   },
   methods: {
+    getUser(){
+      setTimeout(() => {
+        if (Lockr.get('user_info')){
+          this.user_info = Lockr.get('user_info')
+        } else {
+          this.getUser()
+        }
+      },100)
+  },
     getBankList () {
       let _this = this
       let options = {

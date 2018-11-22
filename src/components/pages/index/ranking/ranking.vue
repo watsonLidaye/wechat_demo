@@ -28,7 +28,7 @@
 	 				</div>
 	 			</div>
 	 			<div class="bottom">
-	 				<router-link class="btom_btn" to="/">我要赚钱返现</router-link>
+	 				<router-link class="btom_btn" to="/getGoods">我要赚钱返现</router-link>
 	 			</div>
 	 		</div>
 	</div>

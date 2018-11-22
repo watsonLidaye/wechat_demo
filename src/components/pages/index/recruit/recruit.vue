@@ -13,7 +13,7 @@
 		     infinite-scroll-disabled="loading"
 		     infinite-scroll-distance="50">
 		 		<router-link :to="'/companyDetail?id='+item.id" class="w680 bg_ff mb30" v-for="(item,index) in list" :key="index+'company'">
-		 			<img v-lazy="item.logo" class="w_100 h218" >
+		 			<img v-lazy="item.logo" class="w_100 h218" align="middle">
 		 			<div class="w_100 box_border h140 flex_align pl20 pr20">
 		 				<div class="ft32">{{item.introduction}}</div>
 		 			</div>
