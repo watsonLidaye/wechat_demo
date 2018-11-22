@@ -90,8 +90,15 @@
 }
 .h218{
 	height: 2.18rem;
+	background: #fff
 }
 .h140{
 	height: 1.4rem;
 	background: #fff;
+}
+.w680{
+	width: 6.8rem;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: .3rem;
 }

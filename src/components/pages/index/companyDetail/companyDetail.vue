@@ -2,7 +2,7 @@
  @import 'item.css'
 </style>
 <template>
-	<div id="companyDetail">
+	<div id="companyDetail" v-if="show_detail">
 		<div class="header relative mb100">
 			<img class="header_img" v-lazy="detail.cover_img">
 		</div>
@@ -89,6 +89,7 @@ export default {
 			index_type:0,
 			detail:{},
 			length:0,
+			show_detail:false,
 		}
 	},
 	mounted(){
@@ -110,6 +111,9 @@ export default {
 				if (res.data.data.length!=0) {
 					this.detail = res.data.data
 					this.length = res.data.data.jobs.length
+					if (res.data.data.name) {
+						this.show_detail = true
+					}
 				}
 			 }).catch(res => {
 				console.log(res)

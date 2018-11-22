@@ -5,6 +5,7 @@
 	position: relative;
 	box-sizing: border-box;
 	overflow-y: auto;
+	background: #fff
 }
 .bt_b{
 	border-bottom:1px solid rgba(226,226,226,1);

@@ -15,19 +15,20 @@
 	 							<div class="flex_align">
 	 								<div class="index_number ft40 mr30" :class="{'color_one':index==0,'color_two':index==1,'color_three':index==2}">{{index+1}}</div>
 	 								<div class="w80h80 relative"  :class="{'color_one':index==0,'color_two':index==1,'color_three':index==2}">
+	 									<img :src="item.avatar" class="w_100 h_100 bord5">
 	 									<img src="@/assets/image/index/no_1.png" v-if="index==0" class="w30h30">
 	 									<img src="@/assets/image/index/no_2.png" v-if="index==1" class="w30h30">
 	 									<img src="@/assets/image/index/no_3.png" v-if="index==2" class="w30h30">
 	 								</div>
-	 								<div class="ml25 ft30">Leslie Cheung</div>
+	 								<div class="ml25 ft30">{{item.username}}</div>
 	 							</div>
-	 							<div class="ft24 color_E9AD3A">15732.00 元</div>
+	 							<div class="ft24 color_E9AD3A">{{item.amount}} 元</div>
 	 						</div>
 	 					</div>
 	 				</div>
 	 			</div>
 	 			<div class="bottom">
-	 				<div class="btom_btn">我要赚钱返现</div>
+	 				<router-link class="btom_btn" to="/">我要赚钱返现</router-link>
 	 			</div>
 	 		</div>
 	</div>
@@ -40,10 +41,22 @@ export default {
 	data () {
 		return {
 			fullHeight: document.documentElement.clientHeight,
-			list:[1,1,1,1,1,1,1,1,1,1,1,1]
+			list:[]
 		}
 	},
 	mounted(){
+		this.pageGet()
+	},
+	methods:{
+		pageGet () {
+			let data = {}
+			data.page = this.page
+			$http.get($utill.api.url + 'api/reward/top').then(res => {
+					this.list = res.data.data
+			}).catch(res => {
+				// console.log(res)
+			})
+		},
 	}
 
 

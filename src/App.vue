@@ -96,7 +96,7 @@ export default {
       getUser () {
           let data = {}
           $http.get($utill.api.url + 'api/users', {
-            headers: {
+            headers: { 
               'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
             }
           }).then(res => {

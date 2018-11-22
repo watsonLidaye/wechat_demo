@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="w_100 mb40">
-				<router-link to="companyDetail" class="w_100 jub_jub_center pt60 pb70">
+				<router-link :to="'/companyDetail?id='+detail.company_id" class="w_100 jub_jub_center pt60 pb70">
 					<div class="flex_align ml35">
 						<img class="logo_img mr15" :src="detail.company.logo">
 						<div class="logo_img_height juc_colum_b">
@@ -53,7 +53,7 @@
 					<div class="w490"></div>
 				</div>
 				<div class="flex_warp w_100 mb25">
-						<div class="label_index">五险</div>
+						<div class="label_index" v-for="(item,index) in detail.welfare_tags" :key="index+'welfare_tags'">{{item}}</div>
 						<div class="label_index">包吃</div>
 					</div>
 				<div class="textline mb40">{{detail.welfare_deal}}</div>

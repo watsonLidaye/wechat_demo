@@ -119,6 +119,7 @@ line-height: .9rem;
 text-align: center;
 margin:0 auto;
 font-size: .3rem;
+display: block;
 }
 .w680s{
 	width: 6.8rem;
@@ -164,4 +165,7 @@ border-radius:50%;
 	position: absolute;
 	right: 0rem;
 	top: -.20rem;
+}
+.bord5{
+	border-radius: 50%;
 }
