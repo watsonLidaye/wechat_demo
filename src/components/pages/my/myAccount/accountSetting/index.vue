@@ -62,6 +62,7 @@
   </div>
 </template>
 <script type='text/ecmascript-6'>
+  import { Toast } from 'mint-ui'
 export default {
   name: 'accountSetting',
   data () {
@@ -137,6 +138,13 @@ export default {
           phone: _this.user_info.phone
         }
       }
+      if (!this.user_info.phone) {
+        Toast({
+              message: '请填写手机号码',
+              duration: 3000
+            })
+            return false
+      }
       if (this.timer_second === '获取验证码') {
         this.timer_second = 60
         $http.request(options).then(res => {
@@ -164,6 +172,21 @@ export default {
     },
     // 账户设置
     accountSet () {
+      if (this.bank_card) {
+        Toast({
+              message: '请输入银行卡号',
+              duration: 3000
+            })
+        return false
+      }
+      if (this.verification_code) {
+        Toast({
+              message: '请输入验证码',
+              duration: 3000
+            })
+        return false
+      }
+
       let _this = this
       console.log(Lockr.get('token_type') + ' ' + Lockr.get('token'))
       let options = {

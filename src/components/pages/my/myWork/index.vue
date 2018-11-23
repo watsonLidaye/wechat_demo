@@ -9,7 +9,7 @@
                :key="list_index"
                class="work_item mb25">
             <div class="work_avatar">
-              <img v-lazy="list_item.logo"
+              <img v-lazy="list_item.company.cover_img"
                    class="w116h116">
             </div>
             <div class="item_r ml30">
@@ -17,9 +17,9 @@
                 <h3 class="info_type">{{list_item.job.name}}</h3>
                 <p class="info_describe mb10"
                    v-if="list_item.status === 1">入职时间：{{list_item.worked_at}}</p>
-                <p class="info_describe">{{list_item.company}}</p>
+                <p class="info_describe">{{list_item.company.name}}</p>
               </div>
-              <img v-if="list_item.status === 1"
+              <img v-if="list_item.status === 0"
                    src="./join.png"
                    class="work_status">
               <img v-else
@@ -62,6 +62,7 @@ export default {
         }
       }
       $http.request(options).then(res => {
+        console.log(res.data.data.data)
         if (this.page == 1) {
           this.list = res.data.data.data
         } else {
