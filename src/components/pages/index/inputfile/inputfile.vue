@@ -21,7 +21,7 @@
 		</div>
 		<div class="w680 jub_jub_center pb48">
 			<div class="sex_age jub_jub_center">
-				<input type="number" class="w_100 ft30 box_border pl40 h_100" placeholder="验证码" maxlength="3" v-model="verification_code">
+				<input type="number" class="w_100 ft30 box_border pl40 h_100" placeholder="验证码" maxlength="4" v-model="verification_code">
 			</div>
 			<div class="sex_age juc_colum_b ft30 borderl" @click="getCode">
 				{{code}}
@@ -174,10 +174,20 @@ export default {
 					},3000)
 			}).catch(res => {
 				console.log(res)
+				Toast({
+					  message: '请输入正确的手机号码',
+					  duration: 3000
+					})
 			})
 		},
 		getCode(){
 			let time = 120
+			if (this.code!='获取验证码') {
+				Toast({
+					  message: '请稍后再试',
+					  duration: 3000
+					})
+			}
 			if (this.phone.length<11) {
 				Toast({
 					  message: '请输入正确的手机号码',
