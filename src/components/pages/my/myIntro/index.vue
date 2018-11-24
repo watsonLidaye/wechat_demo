@@ -3,6 +3,7 @@
     <div class="intro_panel"
          :style="{'min-height':fullHeight+'px'}">
       <div class="intro_list"
+           v-if="list.length > 0"
            v-for="(intro_item, intro_index) in list"
            :key="intro_index">
         <!-- 0 none -->
@@ -66,12 +67,20 @@
           </div>
         </div>
       </div>
+      <nodata v-if="list.length === 0"
+              :show-type="'intro'"
+              class="h_100"></nodata>
     </div>
   </div>
 </template>
 <script>
+import nodata from '@/components/common/nodata/index.vue'
+import { Toast } from 'mint-ui'
 export default {
   name: 'myIntro',
+  components: {
+    nodata
+  },
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,

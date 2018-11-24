@@ -104,3 +104,10 @@
   font-weight: 700;
   text-align: center;
 }
+.next_btn.forbid {
+  background: linear-gradient(
+    -32deg,
+    rgba(178, 178, 178, 1),
+    rgba(204, 204, 204, 1)
+  );
+}

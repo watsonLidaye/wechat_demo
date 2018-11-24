@@ -4,7 +4,8 @@
          infinite-scroll-disabled="loading"
          infinite-scroll-distance="50">
       <div class="work_panel">
-        <div class="work_list">
+        <div class="work_list"
+             v-if="list.length > 0">
           <div v-for="(list_item,list_index) in list"
                :key="list_index"
                class="work_item mb25">
@@ -28,13 +29,21 @@
             </div>
           </div>
         </div>
+        <nodata v-if="list.length === 0"
+                :show-type="'work'"
+                class="h_100"></nodata>
       </div>
     </div>
   </div>
 </template>
 <script>
+import nodata from '@/components/common/nodata/index.vue'
+import { Toast } from 'mint-ui'
 export default {
   name: 'myWork',
+  components: {
+    nodata
+  },
   data () {
     return {
       page: 1, //分页
@@ -62,7 +71,6 @@ export default {
         }
       }
       $http.request(options).then(res => {
-        console.log(res.data.data.data)
         if (this.page == 1) {
           this.list = res.data.data.data
         } else {

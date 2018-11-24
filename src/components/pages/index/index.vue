@@ -10,7 +10,8 @@
 				       name=""
 				       class="w_100 h_100 l60 text_center"
 				       placeholder="请输入职位或者公司名"
-				       maxlength="16" v-model="searching">
+				       maxlength="16"
+				       v-model="searching">
 				<span class="el-icon-search seach_btn"></span>
 			</div>
 			<mt-swipe :show-indicators="false"
@@ -53,10 +54,11 @@
 		     infinite-scroll-distance="50">
 			<div class="navbto"></div>
 			<div class="pb_tabbas">
-				<template v-for="(item,index) in list"
-				          v-if="item">
-					<div @click="toJobDetail(item.id)"       class="block relative w_100 pd30 box_border pb15"
-					             :key="index+'list'">
+				<template v-if="list.length>0"
+				          v-for="(item,index) in list">
+					<div @click="toJobDetail(item.id)"
+					     class="block relative w_100 pd30 box_border pb15"
+					     :key="index+'list'">
 						<div class="w_100 jub_jub_center mb25">
 							<div class="ft30 flex_align ">
 								<div>{{item.name}}</div>
@@ -66,7 +68,9 @@
 							<div class="ft24 index_money">{{item.salary_begin}}-{{item.salary_end}}元</div>
 						</div>
 						<div class="flex_warp w_100 mb25">
-							<div class="label_index" v-for="(sitem,sindex) in item.welfare_tags" :key="sindex+'welfare_tags'">{{sitem}}</div>
+							<div class="label_index"
+							     v-for="(sitem,sindex) in item.welfare_tags"
+							     :key="sindex+'welfare_tags'">{{sitem}}</div>
 						</div>
 						<div class="flex_align">
 							<img class="logo_img mr15"
@@ -84,15 +88,20 @@
 					<div class="navbto"
 					     :key="index+'bot'"></div>
 				</template>
+				<nodata v-if="list.length === 0"
+				        :show-type="'home'"> </nodata>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-
+import nodata from '@/components/common/nodata/index.vue'
 export default {
 	name: 'index',
+	components: {
+		nodata
+	},
 	data () {
 		return {
 			fullHeight: document.documentElement.clientHeight,
@@ -100,8 +109,8 @@ export default {
 			list: [],
 			loading: false,
 			page: 1,
-			searching:'',
-			pages:1
+			searching: '',
+			pages: 1
 		}
 	},
 	mounted () {
@@ -142,14 +151,14 @@ export default {
 		loadMore () {
 			if (!this.searching) {
 				if (this.list.length == 0) {
-				return false
-			}
-			this.page += 1
-			if (this.page > this.last_page) {
-				return false
-			}
-			this.loading = true
-			this.pageGet()
+					return false
+				}
+				this.page += 1
+				if (this.page > this.last_page) {
+					return false
+				}
+				this.loading = true
+				this.pageGet()
 			} else {
 				if (!this.searching) {
 					if (this.list.length == 0) {
@@ -160,34 +169,34 @@ export default {
 				if (this.pages > this.last_page) {
 					return false
 				}
-			this.loading = true
-			this.searchOp()
+				this.loading = true
+				this.searchOp()
 			}
 		},
-		searchOp(){
-			$http.get($utill.api.url + 'api/job/search?q='+ this.searching+'&page='+ this.pages).then( res => {
-			 	if (this.pages == 1) {
-			 		this.list = res.data.data.data
-			 	} else {
+		searchOp () {
+			$http.get($utill.api.url + 'api/job/search?q=' + this.searching + '&page=' + this.pages).then(res => {
+				if (this.pages == 1) {
+					this.list = res.data.data.data
+				} else {
 					for (let i in res.data.data.data) {
 						this.list.push(res.data.data.data[i])
 					}
-			 	}
+				}
 				this.last_page = res.data.data.last_page
-			 }).catch(res => {
+			}).catch(res => {
 				console.log(res)
-			 })
+			})
 		},
-		toJobDetail(id){
+		toJobDetail (id) {
 			this.$router.push({
-				path:'/jobdetail?query='+'0'+'reid'+id,
+				path: '/jobdetail?query=' + '0' + 'reid' + id,
 			})
 		}
 	},
-	watch:{
-		searching(val,old) {
+	watch: {
+		searching (val, old) {
 			console.log(val)
-			if (val!=old) {
+			if (val != old) {
 				this.pages = 1
 			}
 			if (val) {

@@ -1,17 +1,29 @@
 <template>
   <div>
-    <mt-popup v-model="popupVisible">
+    <div class="popup_modal"
+         v-if="popVisible"
+         @click.self="popClose">
       <div class="popup_wrap">
-        <template v-if="popupType === 'person'">
-          您的个人资料未填写
-          请填写个人资料后提交借款申请
+        <template v-if="popType === 'person'">
+          <p class="mb20">您的个人资料未填写</p>
+          <p class="mb60">请填写个人资料后提交借款申请</p>
+          <div class="flex flex_h_between flex_v_center">
+            <div class="pop_cancle"
+                 @click="popClose">取消</div>
+            <div class="pop_write"
+                 @click="toWriting">去填写</div>
+          </div>
         </template>
-        <template v-if="popupType === 'company'">
-          你还未入职任何公司
-          如有疑问请联系驻场管理员
+        <template v-if="popType === 'company'">
+          <p class="mb20">你还未入职任何公司</p>
+          <p class="mb60">如有疑问请联系驻场管理员</p>
+          <div class="pop_confirm"
+               @click="popClose">
+            确定
+          </div>
         </template>
       </div>
-    </mt-popup>
+    </div>
   </div>
 </template>
 <script>
@@ -19,11 +31,11 @@ import { Toast } from 'mint-ui'
 export default {
   name: 'popup',
   props: {
-    popupType: {
+    popType: {
       type: String,
       value: ''
     },
-    popupVisible: {
+    popVisible: {
       type: Boolean,
       value: ''
     }
@@ -35,11 +47,14 @@ export default {
   },
   created () { },
   mounted () {
-    // console.log(this.popupType)
-    // console.log(this.popupVisible)
   },
   methods: {
-
+    popClose () {
+      this.$emit('pop-trigger', false)
+    },
+    toWriting () {
+      this.$router.push({ name: 'accountSetting' })
+    }
   },
   computed: {},
   destroyed () { }

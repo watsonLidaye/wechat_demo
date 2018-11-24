@@ -43,11 +43,15 @@
           </div>
         </div>
       </div>
-      <div class="next_btn"
+      <div v-if="amount > 0"
+           class="next_btn"
            @click="borrowMoney">下一步</div>
+      <div v-else
+           class="next_btn forbid">下一步</div>
     </div>
-    <popup :popup-type="popupType"
-           :popup-visible="popupVisible"></popup>
+    <popup v-on:pop-trigger="popClose"
+           :pop-type="popType"
+           :pop-visible="popVisible"></popup>
   </div>
 </template>
 <script>
@@ -66,8 +70,8 @@ export default {
       amount: 0,
       borrow_remark: '',
       bank_name: '',
-      popupType: 'company',
-      popupVisible: true
+      popType: 'person',
+      popVisible: false
     }
   },
   created () { },
@@ -75,16 +79,26 @@ export default {
     this.getUser()
   },
   methods: {
+    popClose (e) {
+      this.popVisible = e
+    },
     getUser () {
-      // setTimeout(() => {
-      if (Lockr.get('user_info')) {
-        this.user_info = Lockr.get('user_info')
-        this.showingBankName()
-      } else {
-        // this.getUser()
-        // this.push
+      setTimeout(() => {
+        if (Lockr.get('user_info')) {
+          this.user_info = Lockr.get('user_info')
+          this.loopUserInfo()
+          this.showingBankName()
+        } else {
+          this.getUser()
+        }
+      }, 100)
+    },
+    loopUserInfo () {
+      for (let i in this.user_info) {
+        if (this.user_info[i] === '' || this.user_info[i] === null) {
+          this.popVisible = true
+        }
       }
-      // }, 100)
     },
     showingBankName () {
       let bank_list = Lockr.get('bank_list')

@@ -72,8 +72,11 @@
                  placeholder="请输入提现金额"
                  class="withdraw_price"
                  v-model="money">
-          <div class="next_step_btn"
+          <div v-if="money>0"
+               class="next_step_btn"
                @click="withdraw_step = 2">下一步</div>
+          <div v-else
+               class="next_step_btn forbid">下一步</div>
         </div>
       </div>
       <!-- 提现确认 -->
@@ -231,8 +234,14 @@ export default {
         }
       }
       $http.request(options).then(res => {
-        _this.$router.push({ name: 'borrowSubmit' })
+        // 不能提交成功的情况会跳转到账户设置
+        if (res.data.code === 1) {
+          _this.$router.push({ name: 'borrowSubmit' })
+        } else {
+          this.$router.push({ name: 'accountSetting' })
+        }
       }).catch(res => {
+        console.log(res.response.data.msg)
         Toast({
           message: res.response.data.msg,
           position: 'bottom',
