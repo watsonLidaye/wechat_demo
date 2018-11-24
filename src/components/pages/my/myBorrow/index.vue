@@ -46,31 +46,51 @@
       <div class="next_btn"
            @click="borrowMoney">下一步</div>
     </div>
+    <popup :popup-type="popupType"
+           :popup-visible="popupVisible"></popup>
   </div>
 </template>
 <script>
 import { Toast } from 'mint-ui'
+import popup from '@/components/common/popup/index.vue'
 import bankList from '@/assets/js/mock/bank.json'
 export default {
   name: 'myBorrow',
+  components: {
+    popup: popup
+  },
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
+      user_info: '',
       amount: 0,
       borrow_remark: '',
       bank_name: '',
-      user_info: Lockr.get('user_info')
+      popupType: 'company',
+      popupVisible: true
     }
   },
   created () { },
   mounted () {
-    this.showingBankName()
+    this.getUser()
   },
   methods: {
+    getUser () {
+      // setTimeout(() => {
+      if (Lockr.get('user_info')) {
+        this.user_info = Lockr.get('user_info')
+        this.showingBankName()
+      } else {
+        // this.getUser()
+        // this.push
+      }
+      // }, 100)
+    },
     showingBankName () {
-      for (let i in bankList) {
-        if (bankList[i].value === this.user_info.bank_code) {
-          this.bank_name = bankList[i].label
+      let bank_list = Lockr.get('bank_list')
+      for (let i in bank_list) {
+        if (bank_list[i].key === this.user_info.bank_code) {
+          this.bank_name = bank_list[i].val
         }
       }
     },

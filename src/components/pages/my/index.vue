@@ -96,39 +96,53 @@ export default {
   },
   created () { },
   mounted () {
-    this.getBankList()
     this.getUser()
+    this.getBankList()
   },
   methods: {
-    getUser(){
+    getUser () {
       setTimeout(() => {
-        if (Lockr.get('user_info')){
+        if (Lockr.get('user_info')) {
           this.user_info = Lockr.get('user_info')
         } else {
           this.getUser()
         }
-      },100)
-  },
+      }, 100)
+    },
     getBankList () {
-      let _this = this
+      let that = this
       let options = {
         method: 'get',
-        url: $utill.api.url + 'api/common',
-        headers: {
-          'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token'),
-        }
+        url: $utill.api.url + 'api/common'
       }
       $http.request(options).then(res => {
-        this.tel = 'tel:+' + res.data.data.customerPhone
-        Lockr.set('bank_info', res.data.data)
-        console.log(res.data.data.bank)
+        if (res.data.code === 1) {
+          // 客服电话
+          this.tel = 'tel:+' + res.data.data.customerPhone
+          // 获取银行信息传入
+          this.getBank(res.data.data.bank)
+        } else {
+          Toast({
+            message: res.data.msg,
+            position: 'bottom',
+            duration: 3000
+          })
+        }
       }).catch(res => {
-        Toast({
-          message: res.response.data.msg,
-          position: 'bottom',
-          duration: 5000
-        })
+        console.log(res)
       })
+    },
+    getBank (tmpData) {
+      // 银行列表
+      let bank_list = []
+      for (let i in tmpData) {
+        let bank_item = {}
+        bank_item.key = i
+        bank_item.val = tmpData[i]
+        bank_list.push(bank_item)
+      }
+      // 添加到本地
+      Lockr.set('bank_list', bank_list)
     }
   },
   computed: {},
