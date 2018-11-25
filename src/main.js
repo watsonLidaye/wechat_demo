@@ -54,45 +54,51 @@ router.afterEach((to, from) => {
       $store.commit('tabbas', 'none')
       break
   }
-  console.log(to.name != 'share')
-  if (to.name != 'share') {
-    wx.ready(function() {
-      // wx.hideMenuItems({
-      //   menuList: ['menuItem:copyUrl'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-      // })
-      // wx.showMenuItems({
-      //   menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:addContact'] // 要显示的菜单项，所有menu项见附录3
-      // })
-      let link = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=http://recruit.ztsdjy.com${to.path}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
-      wx.onMenuShareAppMessage({
-        title: document.title, // 分享标题
-        desc: document.title, // 分享描述
-        link: link,
-        // imgUrl: imgUrl, // 分享图标
-        type: 'link', // 分享类型,music、video或link，不填默认为link
-        success: function() {
-
-          // 用户确认分享后执行的回调函数
-        },
-        cancel: function() {
-
-          // 用户取消分享后执行的回调函数
-        }
-      })
-      wx.onMenuShareTimeline({
-        title: document.title, // 分享标题
-        link: link,
-        // imgUrl: imgUrl, // 分享图标
-        success: function() {
-
-        },
-        cancel: function() {}
-      })
-    })
-    wx.error(function(res) {
-      console.log(res)
-    })
+  let shareurl = ''
+  if (to.name == 'jobdetail') {
+    Lockr.set('shareurl', location.href)
   }
+  if (to.name != 'share') {
+    shareurl = to.path
+  } else {
+    shareurl = Lockr.get('shareurl')
+  }
+  wx.ready(function() {
+    // wx.hideMenuItems({
+    //   menuList: ['menuItem:copyUrl'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+    // })
+    // wx.showMenuItems({
+    //   menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:addContact'] // 要显示的菜单项，所有menu项见附录3
+    // })
+    let link = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=http://recruit.ztsdjy.com${shareurl}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+    wx.onMenuShareAppMessage({
+      title: document.title, // 分享标题
+      desc: document.title, // 分享描述
+      link: link,
+      // imgUrl: imgUrl, // 分享图标
+      type: 'link', // 分享类型,music、video或link，不填默认为link
+      success: function() {
+
+        // 用户确认分享后执行的回调函数
+      },
+      cancel: function() {
+
+        // 用户取消分享后执行的回调函数
+      }
+    })
+    wx.onMenuShareTimeline({
+      title: document.title, // 分享标题
+      link: link,
+      // imgUrl: imgUrl, // 分享图标
+      success: function() {
+
+      },
+      cancel: function() {}
+    })
+  })
+  wx.error(function(res) {
+    console.log(res)
+  })
 })
 
 axios.defaults.timeout = 1000 * 15

@@ -108,7 +108,7 @@
 </template>
 
 <script>
-
+import { Toast } from 'mint-ui'
 export default {
 	name: 'jobdetail',
 	data () {
@@ -118,6 +118,14 @@ export default {
 			show_detail:false,
 			second_jump:false,
 			job_id:''
+		}
+	},
+	computed:{
+		userInfo(){
+			return Lockr.get('user_info')
+		},
+		recommend(){
+			return Lockr.get('recommend')
 		}
 	},
 	mounted(){
@@ -153,7 +161,7 @@ export default {
             this.getUser()
           })
 		},
-		 getUser () {
+		getUser () {
           let data = {}
           $http.get($utill.api.url + 'api/users', {
             headers: {
@@ -161,19 +169,44 @@ export default {
             }
           }).then(res => {
              Lockr.set('user_info',res.data.data)
-             this.$router.push({name:'inputfile',query:{'job_id':this.job_id}})
-          }).catch(res => {
-            // console.log(res)
-          })
-        },
-	},
-	computed:{
-		userInfo(){
-			return Lockr.get('user_info')
-		}
-	}
-
-
+             console.log(res.data.data.phone)
+             if (!res.data.data.phone) {
+             	this.$router.push({name:'inputfile',query:{'job_id':this.job_id}})
+             } else {
+             	let param = {}
+             	param.job_id = this.job_id
+				if (this.recommend) {
+					param.referee_user_id = this.recommend
+					param.referee_job_id = this.job_id
+				}
+			$http.post($utill.api.url + 'api/users/enrolls/auto',param, {
+           		headers: {
+              		'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
+           	 	}
+          	}).then(resss => {
+          		Toast({
+					  message:'报名成功',
+					  iconClass: 'icon icon-success',
+					  duration: 3000
+				})
+				setTimeout(() => {
+					this.$router.push({name:'index'})
+				},3000)
+          	}).catch(ress => {
+				Toast({
+					  message: ress.data.data.msg,
+					  duration: 3000
+					})
+          		})
+          }
+         }).catch(res => {
+					Toast({
+					  message: res.data.data.msg,
+					  duration: 3000
+					})
+          		})
+      	},
+    },
 }
 </script>
 
