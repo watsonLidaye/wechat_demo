@@ -91,6 +91,10 @@
 				<nodata v-if="list.length === 0"
 				        :show-type="'home'"> </nodata>
 			</div>
+			
+		</div>
+		<div class="w_100 text_center pb100" >
+			{{text}}
 		</div>
 	</div>
 </template>
@@ -110,7 +114,8 @@ export default {
 			loading: false,
 			page: 1,
 			searching: '',
-			pages: 1
+			pages: 1,
+			last_page:0,
 		}
 	},
 	mounted () {
@@ -132,9 +137,7 @@ export default {
 			})
 		},
 		pageGet () {
-			let data = {}
-			data.page = this.page
-			$http.get($utill.api.url + '/api/job').then(res => {
+			$http.get($utill.api.url + '/api/job?page='+this.page).then(res => {
 				if (this.page == 1) {
 					this.list = res.data.data.data
 				} else {
@@ -191,6 +194,16 @@ export default {
 			this.$router.push({
 				path: '/jobdetail?query=' + '0' + 'reid' + id,
 			})
+		}
+	},
+	computed:{
+		text(){
+			if (this.list.length>0&&this.last_page<=this.page) {
+				return '没有更多了'
+			}
+			if (this.list.length>0&&this.last_page<=this.pages) {
+				return '没有更多了'
+			}
 		}
 	},
 	watch: {

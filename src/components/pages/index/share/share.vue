@@ -70,6 +70,9 @@ export default {
 			this.user = this.$route.params.user
 			this.qrcode()
 		}
+		if (!this.$route.params.detail) {
+			this.$router.push({name:'index'})
+		}
 	},
 	methods:{
 		qrcode(){

@@ -88,20 +88,20 @@
 						<div class="ft30">有奖推荐</div>
 					</div>
 				</div>
-				<router-link class="rightbtn juc_colum_b" :to="'/inputfile?job_id='+job_id">
+				<div class="rightbtn juc_colum_b" @click="jumpInput">
 					<div class="flex_align ">
 						<img src="@/assets/image/index/sign up_btn.png" class="w32h32 mr10">
 						<div class="ft30 color_ff">在线报名</div>
 					</div>
-				</router-link>
+				</div>
 			</div>
 			<div class="bto_bar juc_colum_b box_border pl35"  v-if="second_jump">
-				<router-link class="rightbtn juc_colum_b" :to="'/inputfile?job_id='+job_id">
+				<div class="rightbtn juc_colum_b" @click="jumpInput">
 					<div class="flex_align ">
 						<img src="@/assets/image/index/sign up_btn.png" class="w32h32 mr10">
 						<div class="ft30 color_ff">在线报名</div>
 					</div>
-				</router-link>
+				</div>
 			</div>
 		</template>
 	</div>
@@ -148,6 +148,24 @@ export default {
 				console.log(res)
 			 })
 		},
+		jumpInput(){
+			 $utill.common.checktoken().then(() => {
+            this.getUser()
+          })
+		},
+		 getUser () {
+          let data = {}
+          $http.get($utill.api.url + 'api/users', {
+            headers: {
+              'Authorization': Lockr.get('token_type') + ' ' + Lockr.get('token')
+            }
+          }).then(res => {
+             Lockr.set('user_info',res.data.data)
+             this.$router.push({name:'inputfile',query:{'job_id':this.job_id}})
+          }).catch(res => {
+            // console.log(res)
+          })
+        },
 	},
 	computed:{
 		userInfo(){
