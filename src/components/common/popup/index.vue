@@ -2,7 +2,7 @@
   <div>
     <div class="popup_modal"
          v-if="popVisible"
-         @click.self="popClose">
+         @click.self="closeMask">
       <div class="popup_wrap">
         <template v-if="popType === 'person'">
           <p class="mb20">您的个人资料未填写</p>
@@ -18,7 +18,7 @@
           <p class="mb20">你还未入职任何公司</p>
           <p class="mb60">如有疑问请联系驻场管理员</p>
           <div class="pop_confirm"
-               @click="popClose">
+               @click="toIndex">
             确定
           </div>
         </template>
@@ -49,14 +49,17 @@ export default {
   mounted () {
   },
   methods: {
-    popClose () {
-      this.$emit('pop-trigger', false)
-    },
     toMy () {
       this.$router.push({ name: 'my' })
     },
     toWriting () {
       this.$router.push({ name: 'accountSetting' })
+    },
+    toIndex () {
+      this.$router.push({ name: 'index' })
+    },
+    closeMask () {
+      this.$emit('pop-mask', false)
     }
   },
   computed: {},

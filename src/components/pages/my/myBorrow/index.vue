@@ -49,8 +49,7 @@
       <div v-else
            class="next_btn forbid">下一步</div>
     </div>
-    <popup v-on:pop-trigger="popClose"
-           :pop-type="popType"
+    <popup :pop-type="popType"
            :pop-visible="popVisible"></popup>
   </div>
 </template>
@@ -79,9 +78,6 @@ export default {
     this.getUser()
   },
   methods: {
-    popClose (e) {
-      this.popVisible = e
-    },
     getUser () {
       setTimeout(() => {
         if (Lockr.get('user_info')) {

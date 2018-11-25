@@ -124,8 +124,7 @@
         </div>
       </div>
     </mt-popup>
-    <popup v-on:pop-trigger="goIndex"
-           :pop-type="popType"
+    <popup :pop-type="popType"
            :pop-visible="popVisible"></popup>
   </div>
 </template>
@@ -168,9 +167,6 @@ export default {
         }
       }
       // console.log(this.open_bank)
-    },
-    goIndex () {
-      this.$router.push({ name: 'index' })
     },
     checkCredit () {
       if (this.user_info.credit === undefined || this.user_info.credit <= 0) {
