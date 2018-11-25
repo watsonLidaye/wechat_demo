@@ -9,7 +9,7 @@
           <p class="mb60">请填写个人资料后提交借款申请</p>
           <div class="flex flex_h_between flex_v_center">
             <div class="pop_cancle"
-                 @click="popClose">取消</div>
+                 @click="toMy">取消</div>
             <div class="pop_write"
                  @click="toWriting">去填写</div>
           </div>
@@ -51,6 +51,9 @@ export default {
   methods: {
     popClose () {
       this.$emit('pop-trigger', false)
+    },
+    toMy () {
+      this.$router.push({ name: 'my' })
     },
     toWriting () {
       this.$router.push({ name: 'accountSetting' })

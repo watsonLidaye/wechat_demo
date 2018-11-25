@@ -42,7 +42,7 @@
           <!--  -->
           <div class="account_op">
             <div class="account_op_item"
-                 @click="popupVisible =true">
+                 @click="checkCredit">
               <div class="ft32 color_333">提现</div>
               <img src="./image/arrow_2.png"
                    alt=""
@@ -74,7 +74,7 @@
                  v-model="money">
           <div v-if="money>0"
                class="next_step_btn"
-               @click="withdraw_step = 2">下一步</div>
+               @click="filterUserInfo">下一步</div>
           <div v-else
                class="next_step_btn forbid">下一步</div>
         </div>
@@ -124,17 +124,26 @@
         </div>
       </div>
     </mt-popup>
+    <popup v-on:pop-trigger="goIndex"
+           :pop-type="popType"
+           :pop-visible="popVisible"></popup>
   </div>
 </template>
 <script>
 import { Toast } from 'mint-ui'
 import bankList from '@/assets/js/mock/bank.json'
+import popup from '@/components/common/popup/index'
 export default {
   name: 'myAccount',
+  components: {
+    popup
+  },
   data () {
     return {
       fullHeight: document.documentElement.clientHeight,
       popupVisible: false,
+      popType: 'company',
+      popVisible: false,
       account_info: {}, //账户信息
       user_info: Lockr.get('user_info'), //用户信息
       money: 0, //提现金额
@@ -159,6 +168,30 @@ export default {
         }
       }
       // console.log(this.open_bank)
+    },
+    goIndex () {
+      this.$router.push({ name: 'index' })
+    },
+    checkCredit () {
+      if (this.user_info.credit === undefined || this.user_info.credit <= 0) {
+        this.popVisible = true
+      } else {
+        this.popupVisible = true
+      }
+    },
+    filterUserInfo () {
+      for (let i in this.user_info) {
+        if (this.user_info[i] === '' || this.user_info[i] === null) {
+          this.$router.push({ name: 'accountSetting' })
+          Toast({
+            message: '用户信息不完整，请补充',
+            position: 'bottom',
+            duration: 3000
+          })
+        } else {
+          this.withdraw_step = 2
+        }
+      }
     },
     // 用户账户信息，金额等
     getAccount () {
@@ -241,12 +274,7 @@ export default {
           this.$router.push({ name: 'accountSetting' })
         }
       }).catch(res => {
-        console.log(res.response.data.msg)
-        Toast({
-          message: res.response.data.msg,
-          position: 'bottom',
-          duration: 5000
-        })
+        console.log(res)
       })
     },
     checkDetail (type) {
