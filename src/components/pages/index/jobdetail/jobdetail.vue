@@ -29,7 +29,7 @@
 					</div>
 					<img src="@/assets/image/index/arrow.png" class="w32h32 mr35">
 				</router-link>
-				<div class="w724h173">
+				<div class="w724h173" v-if="detail.reward.length>0">
 					<div class="w684h184">
 						<div>
 							<img src="@/assets/image/index/tjyj.png" class="w119h22">

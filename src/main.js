@@ -55,30 +55,34 @@ router.afterEach((to, from) => {
       break
   }
   let shareurl = ''
+  console.log(to)
+  console.log(to.name)
+  console.log(location.href)
   if (to.name == 'jobdetail') {
     Lockr.set('shareurl', location.href)
   }
   if (to.name != 'share') {
-    shareurl = to.path
+    shareurl = 'http://recruit.ztsdjy.com' + to.fullPath
   } else {
     shareurl = Lockr.get('shareurl')
   }
   wx.ready(function() {
+    console.log(Lockr.get('shareurl'))
     // wx.hideMenuItems({
     //   menuList: ['menuItem:copyUrl'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
     // })
     // wx.showMenuItems({
     //   menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:addContact'] // 要显示的菜单项，所有menu项见附录3
     // })
-    let link = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87e20aec5c6a0954&redirect_uri=http://recruit.ztsdjy.com${shareurl}&res&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+    let link = shareurl
+    console.log(link)
     wx.onMenuShareAppMessage({
       title: document.title, // 分享标题
       desc: document.title, // 分享描述
       link: link,
       // imgUrl: imgUrl, // 分享图标
       type: 'link', // 分享类型,music、video或link，不填默认为link
-      success: function() {
-
+      success: function(res) {
         // 用户确认分享后执行的回调函数
       },
       cancel: function() {

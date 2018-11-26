@@ -26,7 +26,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="h_50 w596 juv_colum">
+		<div class="h_50 w596 juv_colum" v-if="detail.reward.length>0">
 			<div>
 				<div class="ft24 color_ff pt30">推荐规则：</div>
 				<div class="ft20 color_ff pt25">推荐他人入职，返现{{detail.reward[0].amount}}元</div>
