@@ -108,7 +108,7 @@ export default {
         },
     // 分享 我的专属二维码
     shareOut () {
-        let that = this;
+        let that = this
         $http.get($utill.api.url + $utill.api.api.jssdk+'?url='+encodeURIComponent(location.href.split('#')[0])).then((res) => {
        Lockr.set('appId',res.data.data.appId)
       if (res.data.code == 1) {
@@ -122,14 +122,14 @@ export default {
           })//通过config接口注入权限验证配置
             wx.ready(function() {
            //  这个链接去详情但是我不知道详情具体要传什么参数  你得修改一下
-          let link =location.href +  that.$router.currentRoute.fullPath;
+          let link =location.href + that.$router.currentRoute.fullPath
           wx.onMenuShareAppMessage({
-            title:'test1', 
-            desc: 'xxxx', 
+            title:'test1',
+            desc: 'xxxx',
             link: link,
-            imgUrl: 'xxx', 
-            type: 'link', 
-            success: function(res) {
+            imgUrl: 'xxx',
+            type: 'link',
+            success: function() {
             },
             cancel: function() {
 
@@ -149,11 +149,10 @@ export default {
     }).catch((res) => {
 
     })
-      
     },
     //分享 其他页面的
     shareOutTwo () {
-      let that = this;
+      let that = this
       $http.get($utill.api.url + $utill.api.api.jssdk+'?url='+encodeURIComponent(location.href.split('#')[0])).then((res) => {
        Lockr.set('appId',res.data.data.appId)
       if (res.data.code == 1) {
@@ -167,20 +166,20 @@ export default {
           })//通过config接口注入权限验证配置
       }
         wx.ready(function() {
-          let link = location.href + that.$router.currentRoute.fullPath;
+          let link = location.href + that.$router.currentRoute.fullPath
           wx.onMenuShareAppMessage({
-            title: document.title, 
-            desc: 'xxxx', 
+            title: document.title,
+            desc: 'xxxx',
             link: link,
             imgUrl: 'xxx',
             type: 'link',
-            success: function(res) {
+            success: function() {
             },
             cancel: function() {
             }
           })
           wx.onMenuShareTimeline({
-            title: document.title, 
+            title: document.title,
             link: link,
             // imgUrl: imgUrl, // 分享图标
             success: function() {
@@ -197,12 +196,12 @@ export default {
   },
   watch: {
     // 监听 $route 变化调用分享链接
-        "$route"(to, from) {
-            let currentRouter = this.$router.currentRoute.name; 
-            if(currentRouter == 'share'){      //如果不是userShare分享页面,则分享另外一个接口
-                this.shareOut();
-            }else{
-                this.shareOutTwo();          //当前页面是userShare页面时分享调用另外一个接口      
+        '$route'(to, from) {
+            let currentRouter = this.$router.currentRoute.name
+            if (currentRouter == 'share') { //如果不是userShare分享页面,则分享另外一个接口
+                this.shareOut()
+            } else {
+                this.shareOutTwo() //当前页面是userShare页面时分享调用另外一个接口
             }
         }
   }

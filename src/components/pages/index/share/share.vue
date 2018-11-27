@@ -15,14 +15,16 @@
 					</div>
 				</div>
 				<div class="h195 w_100 jub_jub_center">
-					<div class="flex_align">
+					<div class="flex_box">
 						<img class="w130h130 mr20" :src="detail.company.logo">
-						<div>
-							<div class="ft32 color_ff mb25">{{detail.name}}</div>
+						<div class="w_100">
+							<div class="w_100 jub_jub_center mb25">
+								<div class="ft32 color_ff ">{{detail.name}}</div>
+								<div class="ft32 color_FFF600">{{detail.salary_begin}}-{{detail.salary_end}}元</div>
+							</div>
 							<div class="ft22 color_ff">{{detail.company.name}}</div>
 						</div>
 					</div>
-					<div class="ft32 color_FFF600">{{detail.salary_begin}}-{{detail.salary_end}}元</div>
 				</div>
 			</div>
 		</div>

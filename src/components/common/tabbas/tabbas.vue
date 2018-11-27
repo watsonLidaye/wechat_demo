@@ -11,7 +11,7 @@
 				<template v-else>
 					<img src="@/assets/image/ico_home_normal.png" class="w46h46 mb10">
 				</template>
-				<div class="color_99" :class="{'tabact':state=='index'}">首页</div>
+				<div class="color_b2" :class="{'tabact':state=='index'}">首页</div>
 			</div>
 			<div class="w_50 juc_colum_b ft20" @click="jump('my') ">
 				<template v-if="state=='my'">
@@ -20,7 +20,7 @@
 				<template v-else>
 					<img src="@/assets/image/ico_my_normal.png" class="w46h46 mb10">
 				</template>
-				<div class="color_99" :class="{'tabact':state=='my'}">我的</div>
+				<div class="color_b2" :class="{'tabact':state=='my'}">我的</div>
 			</div>
 		</div>
 	</div>

@@ -2,7 +2,7 @@
  @import 'item.css'
 </style>
 <template>
-	<div id="jobdetail ">
+	<div id="jobdetail">
 		<template v-if="show_detail">
 			<div class="w_100 pl35 pr35 box_border">
 				<div class="w_100 bt_b">
@@ -31,7 +31,7 @@
 				</router-link>
 				<div class="w724h173" v-if="detail.reward.length>0">
 					<div class="w684h184">
-						<div>
+						<div class="mb20">
 							<img src="@/assets/image/index/tjyj.png" class="w119h22">
 						</div>
 						<div class="ft24 color_ff">.入职7天返现 {{detail.had_rewards}} 元。</div>
@@ -82,7 +82,7 @@
 				<div class="mbbb"></div>
 			</div>
 			<div class="bto_bar flex_align box_border pl35"  v-if="!second_jump">
-				<div class="left_btn box_border juc_colum_b mr15"  @click="jump('share')">
+				<div class="left_btn box_border juc_colum_b mr15 br14"  @click="jump('share')">
 					<div class="flex_align ">
 						<img src="@/assets/image/index/gift_btn.png" class="w32h32 mr10">
 						<div class="ft30">有奖推荐</div>

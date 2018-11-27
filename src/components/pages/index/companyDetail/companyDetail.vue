@@ -10,7 +10,7 @@
 				<div class="flex_align ml35">
 					<div class="logo_img_height juc_colum_b">
 						<div>
-							<div class="ft22 mb15">{{detail.name}}</div>
+							<div class="ft22 mb15 ft40 font_weight">{{detail.name}}</div>
 							<div class="ft22 ">{{detail.scale_str}} / {{detail.industry_str}}</div>
 						</div>
 					</div>
@@ -56,9 +56,9 @@
 		<template v-if="index_type==1">
 			<div @click="toJobDetail(item.id)" class="w_100 pl35 pr35 box_border h182 block" v-for="(item,index ) in detail.jobs" :key="index+'job'">
 				<div class="w_100 h_100 flex">
-				<!-- 	<div class="w115 h_100 flex_align">
-						<img class="iitem_header" v-lazy="item.cover_img">
-					</div> -->
+					<div class="w115 h_100 flex_align">
+						<img class="iitem_header" v-lazy="detail.cover_img">
+					</div>
 					<div class="w565 h_100 juv_column">
 						<div class="w_100 jub_jub_center">
 							<div class="flex_align pt30">

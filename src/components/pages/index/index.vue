@@ -11,8 +11,8 @@
 				       class="w_100 h_100 l60 text_center"
 				       placeholder="请输入职位或者公司名"
 				       maxlength="16"
-				       v-model="searching">
-				<span class="el-icon-search seach_btn"></span>
+				       v-model="searching" :class="{'bg_ff':searching.length>0}">
+				<span class="el-icon-search seach_btn" ></span>
 			</div>
 			<mt-swipe :show-indicators="false"
 			          class="w_100 h_100">

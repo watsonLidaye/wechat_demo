@@ -5,7 +5,7 @@
 	position: relative;
 	box-sizing: border-box;
 	overflow-y: auto;
-	background: #fff
+	background: #fff;
 }
 .bt_b{
 	border-bottom:1px solid rgba(226,226,226,1);
@@ -57,7 +57,7 @@
 	margin: 0 auto;
 	background: url('../../../../assets/image/index/红框阴影图层.png');
 	background-repeat: no-repeat;
-	background-size: 6.8rem 1.84rem;
+	background-size: 7.24rem 1.84rem;
 	margin: 0 auto
 }
 .w119h22{
@@ -124,7 +124,6 @@
 	width:2.74rem;
 	height:.9rem;
 	border:1px solid;
-border-image:linear-gradient(-32deg, rgba(251,116,90,1), rgba(250,158,138,1)) 2 2;
 	border-radius:.14rem;
 	color:#FB775D;
 }
@@ -133,4 +132,7 @@ border-image:linear-gradient(-32deg, rgba(251,116,90,1), rgba(250,158,138,1)) 2 
 	height:.9rem;
 background:linear-gradient(-32deg,rgba(73,142,247,1),rgba(170,212,255,1));
 	border-radius:.14rem;
+}
+.br14{
+	border-radius: .14rem;
 }

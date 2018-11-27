@@ -80,16 +80,11 @@
 	right: 0;
 	bottom:0;
 }
-.w680{
-	width: 6.8rem;
-	margin: 0 auto;
-	border-radius: .14rem;
-}
 .color_99{
 	color: #999;
 }
 .h218{
-
+	height: 2.18rem;
 	background: #fff;
 
 }
@@ -102,4 +97,5 @@
 	margin: 0 auto;
 	display: block;
 	margin-bottom: .3rem;
+	border-radius: .14rem;
 }

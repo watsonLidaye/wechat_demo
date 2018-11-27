@@ -67,3 +67,7 @@
 	right: 0;
 	bottom: 0
 }
+.flex_box{
+	display: flex;
+	flex: 1
+}
