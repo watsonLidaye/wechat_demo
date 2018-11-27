@@ -66,40 +66,40 @@ router.afterEach((to, from) => {
   } else {
     shareurl = Lockr.get('shareurl')
   }
-  wx.ready(function() {
-    console.log(Lockr.get('shareurl'))
-    // wx.hideMenuItems({
-    //   menuList: ['menuItem:copyUrl'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-    // })
-    // wx.showMenuItems({
-    //   menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:addContact'] // 要显示的菜单项，所有menu项见附录3
-    // })
-    let link = shareurl
-    console.log(link)
-    wx.onMenuShareAppMessage({
-      title: document.title, // 分享标题
-      desc: document.title, // 分享描述
-      link: link,
-      // imgUrl: imgUrl, // 分享图标
-      type: 'link', // 分享类型,music、video或link，不填默认为link
-      success: function(res) {
-        // 用户确认分享后执行的回调函数
-      },
-      cancel: function() {
+  // wx.ready(function() {
+  //   console.log(Lockr.get('shareurl'))
+  //   // wx.hideMenuItems({
+  //   //   menuList: ['menuItem:copyUrl'] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+  //   // })
+  //   // wx.showMenuItems({
+  //   //   menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:addContact'] // 要显示的菜单项，所有menu项见附录3
+  //   // })
+  //   let link = shareurl
+  //   console.log(link)
+  //   wx.onMenuShareAppMessage({
+  //     title: document.title, // 分享标题
+  //     desc: document.title, // 分享描述
+  //     link: link,
+  //     imgUrl: 'xxx', // 分享图标
+  //     type: 'link', // 分享类型,music、video或link，不填默认为link
+  //     success: function(res) {
+  //       // 用户确认分享后执行的回调函数
+  //     },
+  //     cancel: function() {
 
-        // 用户取消分享后执行的回调函数
-      }
-    })
-    wx.onMenuShareTimeline({
-      title: document.title, // 分享标题
-      link: link,
-      // imgUrl: imgUrl, // 分享图标
-      success: function() {
+  //       // 用户取消分享后执行的回调函数
+  //     }
+  //   })
+  //   wx.onMenuShareTimeline({
+  //     title: document.title, // 分享标题
+  //     link: link,
+  //     // imgUrl: imgUrl, // 分享图标
+  //     success: function() {
 
-      },
-      cancel: function() {}
-    })
-  })
+  //     },
+  //     cancel: function() {}
+  //   })
+  // })
   wx.error(function(res) {
     console.log(res)
   })

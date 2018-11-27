@@ -25,18 +25,18 @@
 }*/
 </style>
 <template>
-  <div id="app"
-       class="app">
-        <transition name="slide-fade"
-                    mode="out-in">
-          <router-view class="child-view"></router-view>
-        </transition>
+  <div id="app" class="app">
+    <transition name="slide-fade" mode="out-in">
+      <router-view class="child-view"></router-view>
+    </transition>
     <tabbas act="index"></tabbas>
   </div>
 </template>
 
 <script>
 import tabbas from './components/common/tabbas/tabbas.vue'
+import wx from 'weixin-js-sdk'
+
 export default {
   name: 'App',
   components:{
@@ -50,21 +50,22 @@ export default {
   created(){
   },
   mounted(){
-    $http.get($utill.api.url + $utill.api.api.jssdk+'?url='+encodeURIComponent(location.href.split('#')[0])).then((res) => {
-       Lockr.set('appId',res.data.data.appId)
-      if (res.data.code == 1) {
-        this.wxconfig.config({debug: true,
-            appId: res.data.data.appId, // 必填，公众号的唯一标识
-            timestamp:res.data.data.timestamp , // 必填，生成签名的时间戳
-            nonceStr: res.data.data.nonceStr, // 必填，生成签名的随机串
-            signature: res.data.data.signature,// 必填，签名，见附录1
-            jsApiList:res.data.data.jsApiList, // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-          })//通过config接口注入权限验证配置
-      }
+    // $http.get($utill.api.url + $utill.api.api.jssdk+'?url='+encodeURIComponent(location.href.split('#')[0])).then((res) => {
+    //    Lockr.set('appId',res.data.data.appId)
+    //   if (res.data.code == 1) {
+    //     this.wxconfig.config({
+    //         debug: false,
+    //         appId: res.data.data.appId, // 必填，公众号的唯一标识
+    //         timestamp:res.data.data.timestamp , // 必填，生成签名的时间戳
+    //         nonceStr: res.data.data.nonceStr, // 必填，生成签名的随机串
+    //         signature: res.data.data.signature,// 必填，签名，见附录1
+    //         jsApiList:res.data.data.jsApiList, // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    //       })//通过config接口注入权限验证配置
+    //   }
        this.login()
-    }).catch((res) => {
+    // }).catch((res) => {
 
-    })
+    // })
   },
   methods:{
     login(){
@@ -105,7 +106,105 @@ export default {
             // console.log(res)
           })
         },
+    // 分享 我的专属二维码
+    shareOut () {
+        let that = this;
+        $http.get($utill.api.url + $utill.api.api.jssdk+'?url='+encodeURIComponent(location.href.split('#')[0])).then((res) => {
+       Lockr.set('appId',res.data.data.appId)
+      if (res.data.code == 1) {
+        wx.config({
+            debug: false,
+            appId: res.data.data.appId, // 必填，公众号的唯一标识
+            timestamp:res.data.data.timestamp , // 必填，生成签名的时间戳
+            nonceStr: res.data.data.nonceStr, // 必填，生成签名的随机串
+            signature: res.data.data.signature,// 必填，签名，见附录1
+            jsApiList:res.data.data.jsApiList, // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          })//通过config接口注入权限验证配置
+            wx.ready(function() {
+           //  这个链接去详情但是我不知道详情具体要传什么参数  你得修改一下
+          let link =location.href +  that.$router.currentRoute.fullPath;
+          wx.onMenuShareAppMessage({
+            title:'test1', 
+            desc: 'xxxx', 
+            link: link,
+            imgUrl: 'xxx', 
+            type: 'link', 
+            success: function(res) {
+            },
+            cancel: function() {
 
+            }
+          })
+          wx.onMenuShareTimeline({
+            title: document.title, // 分享标题
+            link: link,
+            // imgUrl: imgUrl, // 分享图标
+            success: function() {
+
+            },
+            cancel: function() {}
+          })
+        })
+      }
+    }).catch((res) => {
+
+    })
+      
+    },
+    //分享 其他页面的
+    shareOutTwo () {
+      let that = this;
+      $http.get($utill.api.url + $utill.api.api.jssdk+'?url='+encodeURIComponent(location.href.split('#')[0])).then((res) => {
+       Lockr.set('appId',res.data.data.appId)
+      if (res.data.code == 1) {
+        this.wxconfig.config({
+            debug: false,
+            appId: res.data.data.appId, // 必填，公众号的唯一标识
+            timestamp:res.data.data.timestamp , // 必填，生成签名的时间戳
+            nonceStr: res.data.data.nonceStr, // 必填，生成签名的随机串
+            signature: res.data.data.signature,// 必填，签名，见附录1
+            jsApiList:res.data.data.jsApiList, // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          })//通过config接口注入权限验证配置
+      }
+        wx.ready(function() {
+          let link = location.href + that.$router.currentRoute.fullPath;
+          wx.onMenuShareAppMessage({
+            title: document.title, 
+            desc: 'xxxx', 
+            link: link,
+            imgUrl: 'xxx',
+            type: 'link',
+            success: function(res) {
+            },
+            cancel: function() {
+            }
+          })
+          wx.onMenuShareTimeline({
+            title: document.title, 
+            link: link,
+            // imgUrl: imgUrl, // 分享图标
+            success: function() {
+
+            },
+            cancel: function() {}
+          })
+        })
+        }).catch((res) => {
+
+    })
+    }
+
+  },
+  watch: {
+    // 监听 $route 变化调用分享链接
+        "$route"(to, from) {
+            let currentRouter = this.$router.currentRoute.name; 
+            if(currentRouter == 'share'){      //如果不是userShare分享页面,则分享另外一个接口
+                this.shareOut();
+            }else{
+                this.shareOutTwo();          //当前页面是userShare页面时分享调用另外一个接口      
+            }
+        }
   }
 }
 </script>

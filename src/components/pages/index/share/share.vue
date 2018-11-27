@@ -51,7 +51,6 @@
 </template>
 
 <script>
-
 export default {
 	name: 'share',
 	data () {
