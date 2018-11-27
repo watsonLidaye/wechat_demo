@@ -27,6 +27,7 @@
 }
 .pop_cancle {
   width: 2.31rem;
+  box-sizing: border-box;
   height: 0.94rem;
   line-height: 0.94rem;
   text-align: center;

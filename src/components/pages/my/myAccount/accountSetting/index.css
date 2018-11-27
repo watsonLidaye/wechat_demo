@@ -132,3 +132,6 @@
 .setting_panel{
   background: #fff;
 }
+.border_e2{
+    border-bottom:1px solid #e2e2e2;
+}

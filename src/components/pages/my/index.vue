@@ -6,8 +6,8 @@
       <!-- hd -->
       <div class="user_hd mb15">
         <!-- user -->
-        <div class="user_info">
-          <div>
+        <div class="user_info jub_jub_center">
+          <div class="ml40">
             <div class="user_name mb25">{{user_info.name}}
               <img v-if="user_info.sex === 1"
                    class="icon_30 ml15"
@@ -17,11 +17,11 @@
                    src="./image/ico_nv.png">
             </div>
             <router-link to="/myInfo">
-              <p class="mine_info">我的信息<img class="icon_30 ml10"
+              <p class="mine_info ">我的信息<img class="icon_30 ml10"
                      src="./image/_icobj.png"></p>
             </router-link>
           </div>
-          <img class="user_avatar"
+          <img class="user_avatar mr40"
                v-lazy="user_info.avatar">
         </div>
       </div>

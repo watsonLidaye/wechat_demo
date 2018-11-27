@@ -32,7 +32,7 @@
                    class="color_brown ft24">明细<img src="./image/arrow_gold.png"
                      class="icon_arrow"></div>
             </div>
-            <div class="account_balance_wrap">
+            <div class="account_balance_wrap border_1a8">
               <div class="account_balance color_brown">{{account_info.credit}}</div><span class="ft32 color_brown">元</span>
             </div>
             <div class="ft24 color_brown flex flex_v_center pt15 box_border">

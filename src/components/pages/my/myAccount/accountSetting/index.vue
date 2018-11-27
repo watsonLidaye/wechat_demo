@@ -24,7 +24,7 @@
           <input id="banknumber"
                  v-model="user_info.bank_card"
                  placeholder="请输入银行卡号"
-                 class="input_place">
+                 class="input_place border_e2">
         </div>
         <div class="split_line"></div>
         <div class="input_wrapper">
@@ -179,7 +179,7 @@ export default {
             })
         return false
       }
-      if (this.verification_code) {
+      if (!this.verification_code) {
         Toast({
               message: '请输入验证码',
               duration: 3000

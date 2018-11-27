@@ -5,8 +5,6 @@
         <div class="hd_avatar">
           <img src="//upload.jianshu.io/users/upload_avatars/3343569/3cd46650-54bc-4383-989f-80aacb0c42fe.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180"
                class="avatar">
-          <img src="./image/ico_bj_blue@2x.png"
-               class="icon_edit">
         </div>
         <div class="name">Leslie Cheung</div>
       </div>
@@ -24,7 +22,7 @@
                  type="text"
                  placeholder="请输入你的年龄">
         </div>
-        <div class="input_wrap border_e2e2e2">
+        <div class="input_wrap border_e2e2e2 l152">
           <label class="block input_label">性别</label>
           <input class="input_val w_100"
                  type="text"

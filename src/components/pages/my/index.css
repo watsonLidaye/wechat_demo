@@ -29,10 +29,6 @@
   background: rgba(255, 255, 255, 1);
 }
 .user_info {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  box-sizing: border-box;
   width: 6.8rem;
   height: 1.6rem;
   background: rgba(255, 255, 255, 1);
